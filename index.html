@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Veena Mam! ✨</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-deep-blue: #0a192f;
+            --mid-blue: #172a45;
+            --electric-blue: #00f2fe;
+            --soft-white: #ffffff;
+            --text-silver: #a8b2d1;
+            --glow-blue: rgba(0, 242, 254, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-deep-blue);
+            color: var(--soft-white);
+            overflow: hidden;
+        }
+
+        /* --- Fullscreen Multi-Page System with 3D Depth Transitions --- */
+        .page-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateZ(-150px) rotateX(10deg);
+            transform-style: preserve-3d;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            z-index: 2;
+        }
+
+        .page.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateZ(0) rotateX(0deg);
+        }
+
+        /* --- Floating Particle Background Engine --- */
+        .ambient-decorations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            bottom: -50px;
+            animation: floatUp 7s linear infinite;
+            text-shadow: 0 0 10px var(--electric-blue);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translateY(-115vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Catchy Neon Buttons --- */
+        .custom-btn {
+            background: transparent;
+            color: var(--soft-white);
+            border: 2px solid var(--electric-blue);
+            padding: 14px 38px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 15px var(--glow-blue), inset 0 0 10px var(--glow-blue);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .custom-btn:hover {
+            background: var(--electric-blue);
+            color: var(--bg-deep-blue);
+            box-shadow: 0 0 30px var(--electric-blue);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        /* --- Audio Widget --- */
+        .audio-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(23, 42, 69, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--electric-blue);
+            padding: 10px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 0 15px var(--glow-blue);
+            color: var(--electric-blue);
+        }
+
+        /* ========================================================
+           PAGE 1: WELCOME SCREEN (THE ENVELOPE)
+           ======================================================== */
+        #page-welcome {
+            background: linear-gradient(135deg, #020c1b 0%, #0a192f 100%);
+            text-align: center;
+        }
+
+        #page-welcome .envelope-btn {
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px var(--glow-blue); transform: scale(1); }
+            50% { box-shadow: 0 0 30px var(--electric-blue); transform: scale(1.05); }
+        }
+
+        /* ========================================================
+           PAGE 2: HERO LANDING PAGE
+           ======================================================== */
+        #page-hero {
+            background: radial-gradient(circle at center, var(--mid-blue) 0%, var(--bg-deep-blue) 100%);
+            text-align: center;
+        }
+
+        .date-badge {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--electric-blue);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            border: 1px solid var(--electric-blue);
+            box-shadow: 0 0 10px var(--glow-blue);
+        }
+
+        h1.main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: var(--soft-white);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px var(--glow-blue);
+            margin-bottom: 5px;
+            animation: textFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        h2.sub-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            text-shadow: 0 0 15px var(--glow-blue);
+            margin-bottom: 30px;
+        }
+
+        .from-tag {
+            font-size: 1.2rem;
+            color: var(--text-silver);
+            background: rgba(23, 42, 69, 0.6);
+            padding: 10px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 30px;
+        }
+
+        .from-tag strong {
+            color: var(--soft-white);
+        }
+
+        /* ========================================================
+           PAGE 3: ANIMATED WISHING CARDS
+           ======================================================== */
+        #page-wishes {
+            justify-content: flex-start;
+        }
+
+        .wishes-wrapper {
+            max-width: 650px;
+            width: 100%;
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        .section-headline {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--electric-blue);
+            text-shadow: 0 0 15px var(--glow-blue);
+            margin-bottom: 35px;
+        }
+
+        .note-card {
+            background: var(--mid-blue);
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 25px;
+            border-top: 3px solid var(--electric-blue);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease-out;
+        }
+
+        .page.active .note-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .page.active .note-card:nth-child(1) { transition-delay: 0.2s; }
+        .page.active .note-card:nth-child(2) { transition-delay: 0.4s; }
+        .page.active .note-card:nth-child(3) { transition-delay: 0.6s; }
+
+        .note-card h3 {
+            color: var(--soft-white);
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .note-card h3 i {
+            color: var(--electric-blue);
+        }
+
+        .note-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-silver);
+        }
+
+        .action-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* ========================================================
+           PAGE 4: GLOWING POLAROID AUTOMATIC SLIDESHOW
+           ======================================================== */
+        #page-gallery {
+            background: #020c1b;
+            justify-content: center;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 410px;
+            height: 510px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .polaroid-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--soft-white);
+            padding: 18px;
+            padding-bottom: 50px;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 20px var(--glow-blue);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: scale(0.85) rotate(8deg) translateY(50px);
+            pointer-events: none;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .polaroid-frame.current {
+            opacity: 1;
+            transform: scale(1) rotate(0deg) translateY(0);
+            pointer-events: auto;
+            z-index: 5;
+        }
+
+        .polaroid-frame.past {
+            opacity: 0;
+            transform: scale(1.05) rotate(-8deg) translateX(-100px);
+            z-index: 1;
+        }
+
+        .img-box {
+            width: 100%;
+            height: 85%;
+            background: #111;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.9rem;
+            color: var(--bg-deep-blue);
+            text-align: center;
+            margin-top: auto;
+            font-weight: 700;
+        }
+
+        .slideshow-indicator {
+            margin-top: 30px;
+            color: var(--electric-blue);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--glow-blue);
+        }
+
+        /* --- Mobile Responsiveness Adjustments --- */
+        @media (max-width: 600px) {
+            h1.main-title { font-size: 3.5rem; }
+            h2.sub-title { font-size: 1.8rem; }
+            .section-headline { font-size: 2.8rem; }
+            .slideshow-container {
+                max-width: 86vw;
+                height: 112vw;
+            }
+            .caption { font-size: 1.6rem; }
+            .note-card { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Dynamic Audio Streaming Core -->
+    <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+    
+    <div class="audio-widget" id="music-control" onclick="toggleMusic()" style="display: none;">
+        <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+    </div>
+
+    <!-- Glowing Background Particles Layer -->
+    <div class="ambient-decorations" id="floating-space"></div>
+
+    <!-- Master Layout View Coordinator -->
+    <div class="page-container">
+
+        <!-- ==========================================
+             STAGE 1: THE GLOWING REVEAL SCREEN
+             ========================================== -->
+        <div class="page active" id="page-welcome">
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 12px; color: var(--electric-blue); text-shadow: 0 0 15px var(--glow-blue);">To: Veena Mam ✉_</h2>
+            <p style="font-size: 1.1rem; color: var(--text-silver); margin-bottom: 15px;">Kanak has sent you a special surprise...</p>
+            <button class="custom-btn envelope-btn" onclick="navigateToPage('page-hero')">
+                <i class="fa-solid fa-envelope-open-text"></i> Open Envelope
+            </button>
+        </div>
+
+        <!-- ==========================================
+             STAGE 2: HERO NEON CELEBRATION LANDING
+             ========================================== -->
+        <div class="page" id="page-hero">
+            <div class="date-badge">⚡ JANUARY 14</div>
+            <h1 class="main-title">Happy Birthday</h1>
+            <h2 class="sub-title">Veena Mam! ✨</h2>
+            <div class="from-tag">With lots of love, respect, and warm wishes from <strong>Kanak</strong></div>
+            <button class="custom-btn" onclick="navigateToPage('page-wishes')">
+                Read My Wishes <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- ==========================================
+             STAGE 3: THE CASCADING GREETING PARAGRAPHS
+             ========================================== -->
+        <div class="page" id="page-wishes">
+            <div class="wishes-wrapper">
+                <h2 class="section-headline">Sweetest Wishes</h2>
+                
+                <div class="note-card">
+                    <h3><i class="fa-solid fa-star"></i> To An Inspiring Mentor</h3>
+                    <p><strong>Dear Veena Mam,</strong><br>
+                    On your special day, I want to thank you for your endless guidance, patience, and the wonderful energy you bring into our lives. You aren't just an amazing mentor, but a truly beautiful soul who inspires everyone around you daily!</p>
+                </div>
+
+                <div class="note-card">
+                    <h3><i class="fa-solid fa-infinity"></i> A Little Wish for You</h3>
+                    <p>May your day be filled with as much joy, laughter, and brightness as you bring to the world. I pray that this upcoming year grants you perfect health, endless happiness, and the fulfillment of all your dreams.</p>
+                </div>
+
+                <div class="note-card">
+                    <h3><i class="fa-solid fa-bolt"></i> To the Coolest Mam Ever</h3>
+                    <p>Thank you for being so supportive and making every single day brighter. I am incredibly lucky to have you in my journey. Have an absolutely fantastic and magical birthday! 🎉</p>
+                </div>
+
+                <div class="action-container">
+                    <button class="custom-btn" onclick="startMemoryShow()">
+                        Unlock Memories <i class="fa-solid fa-images"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             STAGE 4: AUTOMATIC FLICKERING SLIDESHOW 
+             ========================================== -->
+        <div class="page" id="page-gallery">
+            <h2 class="section-headline" style="margin-bottom: 25px;">Beautiful Memories</h2>
+            
+            <div class="slideshow-container">
+                <!-- Frame 1 -->
+                <div class="polaroid-frame">
+                    <div class="img-box">
+                        <img src="https://picsum.photos/400/500?random=1" alt="Memory One">
+                    </div>
+                    <div class="caption">Your Beautiful Smile ✨</div>
+                </div>
+
+                <!-- Frame 2 -->
+                <div class="polaroid-frame">
+                    <div class="img-box">
+                        <img src="https://picsum.photos/400/500?random=2" alt="Memory Two">
+                    </div>
+                    <div class="caption">Brightest Moments 🌟</div>
+                </div>
+
+                <!-- Frame 3 -->
+                <div class="polaroid-frame">
+                    <div class="img-box">
+                        <img src="https://picsum.photos/400/500?random=3" alt="Memory Three">
+                    </div>
+                    <div class="caption">Cherished Days 💖</div>
+                </div>
+
+                <!-- Frame 4 -->
+                <div class="polaroid-frame">
+                    <div class="img-box">
+                        <img src="https://picsum.photos/400/500?random=4" alt="Memory Four">
+                    </div>
+                    <div class="caption">Best Mentor Ever 👑</div>
+                </div>
+
+                <!-- Frame 5 -->
+                <div class="polaroid-frame">
+                    <div class="img-box">
+                        <img src="https://picsum.photos/400/500?random=5" alt="Memory Five">
+                    </div>
+                    <div class="caption">Forever Blessed 🌸</div>
+                </div>
+            </div>
+
+            <div class="slideshow-indicator" id="slide-number">SYNCHRONIZING...</div>
+            
+            <button class="custom-btn" style="margin-top: 30px; border-color: var(--text-silver); box-shadow: none;" onclick="navigateToPage('page-hero')">
+                <i class="fa-solid fa-rotate-left"></i> Restart Journey
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Functional Scripts Matrix -->
+    <script>
+        let musicStarted = false;
+        const bgMusic = document.getElementById('bg-music');
+        const musicControl = document.getElementById('music-control');
+        const musicIcon = document.getElementById('music-icon');
+
+        // Linear Router Framework
+        function navigateToPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const activePage = document.getElementById(pageId);
+            activePage.classList.add('active');
+
+            if(!musicStarted && pageId === 'page-hero') {
+                musicStarted = true;
+                musicControl.style.display = 'flex';
+                bgMusic.play().then(() => {
+                    musicIcon.className = "fa-solid fa-volume-high";
+                }).catch(() => console.log("Audio waiting for interaction loop."));
+                
+                setInterval(generateFloatingIcon, 400);
+            }
+
+            if(pageId !== 'page-gallery') {
+                stopSlideshowLoop();
+            }
+        }
+
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicIcon.className = "fa-solid fa-volume-high";
+            } else {
+                bgMusic.pause();
+                musicIcon.className = "fa-solid fa-volume-xmark";
+            }
+        }
+
+        // Blue/White Dynamic Ambient Particle System 
+        const floatSpace = document.getElementById('floating-space');
+        const particleIcons = ['✨', '💙', '🌟', '❄', '💎', '🤍'];
+
+        function generateFloatingIcon() {
+            const particle = document.createElement('span');
+            particle.classList.add('floating-element');
+            particle.innerText = particleIcons[Math.floor(Math.random() * particleIcons.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = Math.random() * 3 + 4 + 's';
+            particle.style.fontSize = Math.random() * 10 + 15 + 'px';
+            
+            floatSpace.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, 7000);
+        }
+
+        // Automatic Polaroid Card Deck Transition Framework
+        let slideshowTimer = null;
+        let activeSlideIndex = 0;
+        const frames = document.querySelectorAll('.polaroid-frame');
+        const indicator = document.getElementById('slide-number');
+
+        function startMemoryShow() {
+            navigateToPage('page-gallery');
+            activeSlideIndex = 0;
+            updateSlideshowSequence();
+            
+            slideshowTimer = setInterval(() => {
+                activeSlideIndex++;
+                if(activeSlideIndex >= frames.length) {
+                    activeSlideIndex = 0;
+                }
+                updateSlideshowSequence();
+            }, 3200);
+        }
+
+        function updateSlideshowSequence() {
+            frames.forEach((frame, idx) => {
+                frame.classList.remove('current', 'past');
+                if(idx === activeSlideIndex) {
+                    frame.classList.add('current');
+                } else if (idx < activeSlideIndex) {
+                    frame.classList.add('past');
+                }
+            });
+            indicator.innerText = `PHOTO 0${activeSlideIndex + 1} // 0${frames.length}`;
+        }
+
+        function stopSlideshowLoop() {
+            if(slideshowTimer) {
+                clearInterval(slideshowTimer);
+                slideshowTimer = null;
+            }
+        }
+    </script>
+</body>
+</html>
