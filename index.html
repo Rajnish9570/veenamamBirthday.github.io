@@ -1,600 +1,724 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Veena Mam! ✨</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f7fc">
+  <title>Pill Calculator | Smart Medical Tool</title>
 
-    <style>
-        :root {
-            --bg-deep-blue: #0a192f;
-            --mid-blue: #172a45;
-            --electric-blue: #00f2fe;
-            --soft-white: #ffffff;
-            --text-silver: #a8b2d1;
-            --glow-blue: rgba(0, 242, 254, 0.6);
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1746b8;
+      --text: #17243b;
+      --muted: #77849a;
+      --border: #e3e9f2;
+      --surface: #ffffff;
+      --background: #f4f7fc;
+      --green: #159957;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-deep-blue);
-            color: var(--soft-white);
-            overflow: hidden;
-        }
+    body {
+      min-height: 100vh;
+      padding: 35px 16px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(ellipse at top left, #e2edff 0%, transparent 42%),
+        var(--background);
+      color: var(--text);
+    }
 
-        /* --- Fullscreen Multi-Page System with 3D Depth Transitions --- */
-        .page-container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            perspective: 1200px;
-        }
+    .container {
+      width: 100%;
+      max-width: 510px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid #e8edf5;
+      border-radius: 24px;
+      box-shadow: 0 20px 65px rgba(35, 61, 110, 0.09);
+    }
 
-        .page {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateZ(-150px) rotateX(10deg);
-            transform-style: preserve-3d;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            z-index: 2;
-        }
+    .header {
+      padding: 30px 28px 25px;
+      background: linear-gradient(135deg, #ffffff, #f4f8ff);
+      border-bottom: 1px solid #edf1f7;
+    }
 
-        .page.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateZ(0) rotateX(0deg);
-        }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
 
-        /* --- Floating Particle Background Engine --- */
-        .ambient-decorations {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-        }
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #3478f6, #1553ce);
+      color: white;
+      font-size: 23px;
+      box-shadow: 0 7px 18px #2563eb35;
+    }
 
-        .floating-element {
-            position: absolute;
-            bottom: -50px;
-            animation: floatUp 7s linear infinite;
-            text-shadow: 0 0 10px var(--electric-blue);
-        }
+    .brand-name {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.7; }
-            100% { transform: translateY(-115vh) scale(1.2) rotate(360deg); opacity: 0; }
-        }
+    .brand-caption {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-        /* --- Catchy Neon Buttons --- */
-        .custom-btn {
-            background: transparent;
-            color: var(--soft-white);
-            border: 2px solid var(--electric-blue);
-            padding: 14px 38px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 0 15px var(--glow-blue), inset 0 0 10px var(--glow-blue);
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
 
-        .custom-btn:hover {
-            background: var(--electric-blue);
-            color: var(--bg-deep-blue);
-            box-shadow: 0 0 30px var(--electric-blue);
-            transform: translateY(-3px) scale(1.02);
-        }
+    h1 {
+      font-size: clamp(27px, 6vw, 34px);
+      line-height: 1.2;
+      letter-spacing: -1.2px;
+    }
 
-        /* --- Audio Widget --- */
-        .audio-widget {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(23, 42, 69, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--electric-blue);
-            padding: 10px;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 0 15px var(--glow-blue);
-            color: var(--electric-blue);
-        }
+    .subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
 
-        /* ========================================================
-           PAGE 1: WELCOME SCREEN (THE ENVELOPE)
-           ======================================================== */
-        #page-welcome {
-            background: linear-gradient(135deg, #020c1b 0%, #0a192f 100%);
-            text-align: center;
-        }
+    .content {
+      padding: 28px;
+    }
 
-        #page-welcome .envelope-btn {
-            animation: pulseGlow 2s infinite ease-in-out;
-        }
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 15px var(--glow-blue); transform: scale(1); }
-            50% { box-shadow: 0 0 30px var(--electric-blue); transform: scale(1.05); }
-        }
+    .section-heading h2 {
+      font-size: 16px;
+      font-weight: 750;
+    }
 
-        /* ========================================================
-           PAGE 2: HERO LANDING PAGE
-           ======================================================== */
-        #page-hero {
-            background: radial-gradient(circle at center, var(--mid-blue) 0%, var(--bg-deep-blue) 100%);
-            text-align: center;
-        }
+    .required-note {
+      color: var(--muted);
+      font-size: 11px;
+    }
 
-        .date-badge {
-            background: rgba(0, 242, 254, 0.1);
-            color: var(--electric-blue);
-            padding: 8px 24px;
-            border-radius: 50px;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            border: 1px solid var(--electric-blue);
-            box-shadow: 0 0 10px var(--glow-blue);
-        }
+    .dose-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 11px;
+      margin-bottom: 25px;
+    }
 
-        h1.main-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 5rem;
-            color: var(--soft-white);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px var(--glow-blue);
-            margin-bottom: 5px;
-            animation: textFloat 3s ease-in-out infinite alternate;
-        }
+    .dose-card {
+      padding: 13px 10px;
+      background: #f8faff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: border-color .2s, box-shadow .2s;
+    }
 
-        @keyframes textFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
+    .dose-card:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px #2563eb12;
+    }
 
-        h2.sub-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--electric-blue);
-            text-shadow: 0 0 15px var(--glow-blue);
-            margin-bottom: 30px;
-        }
+    .dose-label {
+      display: block;
+      margin-bottom: 11px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #52617a;
+    }
 
-        .from-tag {
-            font-size: 1.2rem;
-            color: var(--text-silver);
-            background: rgba(23, 42, 69, 0.6);
-            padding: 10px 30px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 30px;
-        }
+    .dose-input {
+      width: 100%;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 23px;
+      font-weight: 750;
+      font-family: inherit;
+    }
 
-        .from-tag strong {
-            color: var(--soft-white);
-        }
+    label {
+      display: block;
+      margin: 17px 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #34435c;
+    }
 
-        /* ========================================================
-           PAGE 3: ANIMATED WISHING CARDS
-           ======================================================== */
-        #page-wishes {
-            justify-content: flex-start;
-        }
+    .field-wrap {
+      position: relative;
+    }
 
-        .wishes-wrapper {
-            max-width: 650px;
-            width: 100%;
-            margin: auto;
-            padding: 40px 0;
-        }
+    input:not(.dose-input), select {
+      display: block;
+      width: 100%;
+      min-height: 49px;
+      padding: 12px 14px;
+      border: 1px solid #dce4ef;
+      border-radius: 11px;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+      transition: border-color .2s, box-shadow .2s;
+    }
 
-        .section-headline {
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            color: var(--electric-blue);
-            text-shadow: 0 0 15px var(--glow-blue);
-            margin-bottom: 35px;
-        }
+    input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px #2563eb15;
+    }
 
-        .note-card {
-            background: var(--mid-blue);
-            padding: 28px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 25px;
-            border-top: 3px solid var(--electric-blue);
-            transform: translateY(30px);
-            opacity: 0;
-            transition: all 0.6s ease-out;
-        }
+    select {
+      cursor: pointer;
+    }
 
-        .page.active .note-card {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .field-hint {
+      margin-top: 7px;
+      color: #8995a8;
+      font-size: 11px;
+    }
 
-        .page.active .note-card:nth-child(1) { transition-delay: 0.2s; }
-        .page.active .note-card:nth-child(2) { transition-delay: 0.4s; }
-        .page.active .note-card:nth-child(3) { transition-delay: 0.6s; }
+    .duration-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 12px;
+    }
 
-        .note-card h3 {
-            color: var(--soft-white);
-            margin-bottom: 10px;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .calculate-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 53px;
+      margin-top: 27px;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3478f6, #2057d3);
+      color: #fff;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 750;
+      cursor: pointer;
+      box-shadow: 0 8px 20px #2563eb30;
+      transition: transform .2s, box-shadow .2s;
+    }
 
-        .note-card h3 i {
-            color: var(--electric-blue);
-        }
+    .calculate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px #2563eb40;
+    }
 
-        .note-card p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--text-silver);
-        }
+    .calculate-btn:active {
+      transform: translateY(0);
+    }
 
-        .action-container {
-            text-align: center;
-            margin-top: 15px;
-        }
+    .btn-arrow {
+      font-size: 20px;
+      line-height: 1;
+    }
 
-        /* ========================================================
-           PAGE 4: GLOWING POLAROID AUTOMATIC SLIDESHOW
-           ======================================================== */
-        #page-gallery {
-            background: #020c1b;
-            justify-content: center;
-        }
+    .result {
+      display: none;
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid #d9e8ff;
+      border-radius: 17px;
+      background: linear-gradient(145deg, #f5f9ff, #ffffff);
+      animation: reveal .35s ease;
+    }
 
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            max-width: 410px;
-            height: 510px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .polaroid-frame {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: var(--soft-white);
-            padding: 18px;
-            padding-bottom: 50px;
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 20px var(--glow-blue);
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: scale(0.85) rotate(8deg) translateY(50px);
-            pointer-events: none;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    .result-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-        .polaroid-frame.current {
-            opacity: 1;
-            transform: scale(1) rotate(0deg) translateY(0);
-            pointer-events: auto;
-            z-index: 5;
-        }
+    .result-icon {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border-radius: 12px;
+      background: #e2edff;
+      font-size: 19px;
+    }
 
-        .polaroid-frame.past {
-            opacity: 0;
-            transform: scale(1.05) rotate(-8deg) translateX(-100px);
-            z-index: 1;
-        }
+    .result-heading h3 {
+      font-size: 16px;
+    }
 
-        .img-box {
-            width: 100%;
-            height: 85%;
-            background: #111;
-            overflow: hidden;
-            border-radius: 4px;
-        }
+    .result-heading p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
 
-        .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .total-card {
+      padding: 20px 12px;
+      text-align: center;
+      border: 1px solid #dce8ff;
+      border-radius: 14px;
+      background: white;
+    }
 
-        .caption {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.9rem;
-            color: var(--bg-deep-blue);
-            text-align: center;
-            margin-top: auto;
-            font-weight: 700;
-        }
+    .total-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
 
-        .slideshow-indicator {
-            margin-top: 30px;
-            color: var(--electric-blue);
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px var(--glow-blue);
-        }
+    .total {
+      margin: 8px 0;
+      color: var(--primary);
+      font-size: clamp(32px, 8vw, 42px);
+      font-weight: 850;
+      letter-spacing: -1.5px;
+    }
 
-        /* --- Mobile Responsiveness Adjustments --- */
-        @media (max-width: 600px) {
-            h1.main-title { font-size: 3.5rem; }
-            h2.sub-title { font-size: 1.8rem; }
-            .section-headline { font-size: 2.8rem; }
-            .slideshow-container {
-                max-width: 86vw;
-                height: 112vw;
-            }
-            .caption { font-size: 1.6rem; }
-            .note-card { padding: 22px; }
-        }
-    </style>
+    .total-caption {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .result-details {
+      margin-top: 16px;
+      padding: 0 14px;
+      border-radius: 12px;
+      background: white;
+      border: 1px solid #e8edf5;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #edf1f7;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .result-row:last-child {
+      border-bottom: 0;
+    }
+
+    .result-row span {
+      color: #68768d;
+    }
+
+    .result-row strong {
+      color: #24344e;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .error {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 14px;
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      background: #fff1f2;
+      color: #b42332;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .note {
+      display: flex;
+      gap: 10px;
+      margin-top: 25px;
+      padding: 14px;
+      border: 1px solid #e7edf5;
+      border-radius: 12px;
+      background: #f8fafc;
+      color: #718096;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .note-icon {
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+    .footer {
+      padding: 16px 25px;
+      border-top: 1px solid #edf1f7;
+      text-align: center;
+      color: #97a2b3;
+      font-size: 11px;
+    }
+
+    /* ADDED: Developer profile badge */
+    .developer-badge {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      max-width: calc(100vw - 28px);
+      padding: 8px 13px 8px 8px;
+      border: 1px solid #e3e9f2;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 5px 22px rgba(23, 36, 59, 0.14);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .developer-photo {
+      display: block;
+      flex-shrink: 0;
+      width: 39px;
+      height: 39px;
+      border: 2px solid #dce8ff;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 38%;
+    }
+
+    .developer-info {
+      min-width: 0;
+    }
+
+    .developer-label {
+      margin-bottom: 3px;
+      color: #77849a;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .developer-name {
+      color: #17243b;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 390px) {
+      body {
+        padding: 16px 10px;
+      }
+
+      .header, .content {
+        padding: 22px 18px;
+      }
+
+      .dose-grid {
+        gap: 7px;
+      }
+
+      .dose-card {
+        padding: 11px 7px;
+      }
+
+      .dose-input {
+        font-size: 20px;
+      }
+
+      .duration-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .developer-badge {
+        right: 10px;
+        bottom: 10px;
+        gap: 7px;
+        padding: 6px 10px 6px 6px;
+      }
+
+      .developer-photo {
+        width: 34px;
+        height: 34px;
+      }
+
+      .developer-name {
+        font-size: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <main class="container">
 
-    <!-- Background Dynamic Audio Streaming Core -->
-    <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
-    
-    <div class="audio-widget" id="music-control" onclick="toggleMusic()" style="display: none;">
-        <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+    <header class="header">
+      <div class="brand-row">
+        <div class="brand-icon" aria-hidden="true">✚</div>
+        <div>
+          <div class="brand-name">MediCalc</div>
+          <div class="brand-caption">Smart healthcare utilities</div>
+        </div>
+      </div>
+
+      <p class="eyebrow">Dosage planning tool</p>
+      <h1>Pill & Strip<br>Calculator</h1>
+      <p class="subtitle">
+        Calculate your total tablets and required strips
+        based on your prescribed daily dosage.
+      </p>
+    </header>
+
+    <div class="content">
+      <form id="pillForm">
+        <div class="section-heading">
+          <h2>01. Daily dosage</h2>
+          <span class="required-note">Enter tablets per dose</span>
+        </div>
+
+        <div class="dose-grid">
+          <div class="dose-card">
+            <label class="dose-label" for="morning">☀ Morning</label>
+            <input class="dose-input" type="number" id="morning"
+              min="0" max="100" step="0.5" value="1" required>
+          </div>
+
+          <div class="dose-card">
+            <label class="dose-label" for="evening">◷ Evening</label>
+            <input class="dose-input" type="number" id="evening"
+              min="0" max="100" step="0.5" value="1" required>
+          </div>
+
+          <div class="dose-card">
+            <label class="dose-label" for="night">☾ Night</label>
+            <input class="dose-input" type="number" id="night"
+              min="0" max="100" step="0.5" value="0" required>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <h2>02. Treatment period</h2>
+        </div>
+
+        <div class="duration-grid">
+          <div>
+            <label for="duration">Duration</label>
+            <input type="number" id="duration" min="1"
+              max="3650" step="1" value="30" required>
+          </div>
+
+          <div>
+            <label for="unit">Time unit</label>
+            <select id="unit">
+              <option value="days">Days</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-heading" style="margin-top:28px;margin-bottom:0">
+          <h2>03. Packaging details</h2>
+        </div>
+
+        <label for="stripSize">Tablets per strip</label>
+        <input type="number" id="stripSize" min="1"
+          max="1000" step="1" value="10" required>
+        <p class="field-hint">
+          Enter the number of tablets in one complete strip.
+        </p>
+
+        <button class="calculate-btn" type="submit">
+          Calculate requirement
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <section class="result" id="result" aria-live="polite">
+        <div class="result-heading">
+          <div class="result-icon" aria-hidden="true">📊</div>
+          <div>
+            <h3>Calculation summary</h3>
+            <p>Your estimated tablet requirement</p>
+          </div>
+        </div>
+
+        <div class="total-card">
+          <div class="total-label">Total tablets required</div>
+          <div class="total" id="totalResult"></div>
+          <div class="total-caption" id="summary"></div>
+        </div>
+
+        <div class="result-details">
+          <div class="result-row">
+            <span>Total duration</span>
+            <strong id="durationResult"></strong>
+          </div>
+
+          <div class="result-row">
+            <span>Tablets per day</span>
+            <strong id="dailyResult"></strong>
+          </div>
+
+          <div class="result-row">
+            <span>Tablets per strip</span>
+            <strong id="stripSizeResult"></strong>
+          </div>
+
+          <div class="result-row">
+            <span>Strips required</span>
+            <strong id="stripsResult"></strong>
+          </div>
+
+          <div class="result-row">
+            <span>Extra tablets after full strips</span>
+            <strong id="extraResult"></strong>
+          </div>
+        </div>
+      </section>
+
+      <p class="error" id="error" role="alert"></p>
+
+      <div class="note">
+        <span class="note-icon" aria-hidden="true">ⓘ</span>
+        <span>
+          Month calculation uses 30 days per month. Strip quantity
+          is rounded up to ensure enough tablets. This calculator
+          is for quantity estimation only. Follow your doctor's
+          prescribed dosage.
+        </span>
+      </div>
     </div>
 
-    <!-- Glowing Background Particles Layer -->
-    <div class="ambient-decorations" id="floating-space"></div>
+    <footer class="footer">
+      MediCalc · Simple tools for everyday healthcare
+    </footer>
+  </main>
 
-    <!-- Master Layout View Coordinator -->
-    <div class="page-container">
-
-        <!-- ==========================================
-             STAGE 1: THE GLOWING REVEAL SCREEN
-             ========================================== -->
-        <div class="page active" id="page-welcome">
-            <h2 style="font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 12px; color: var(--electric-blue); text-shadow: 0 0 15px var(--glow-blue);">To: Veena Mam ✉_</h2>
-            <p style="font-size: 1.1rem; color: var(--text-silver); margin-bottom: 15px;">Kanak has sent you a special surprise...</p>
-            <button class="custom-btn envelope-btn" onclick="navigateToPage('page-hero')">
-                <i class="fa-solid fa-envelope-open-text"></i> Open Envelope
-            </button>
-        </div>
-
-        <!-- ==========================================
-             STAGE 2: HERO NEON CELEBRATION LANDING
-             ========================================== -->
-        <div class="page" id="page-hero">
-            <div class="date-badge">⚡ June 14</div>
-            <h1 class="main-title">Happy Birthday</h1>
-            <h2 class="sub-title">Veena Mam! ✨</h2>
-            <div class="from-tag">With lots of love, respect, and warm wishes from <strong>Kanak</strong></div>
-            <button class="custom-btn" onclick="navigateToPage('page-wishes')">
-                Read My Wishes <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-
-        <!-- ==========================================
-             STAGE 3: THE CASCADING GREETING PARAGRAPHS
-             ========================================== -->
-        <div class="page" id="page-wishes">
-            <div class="wishes-wrapper">
-                <h2 class="section-headline">Sweetest Wishes</h2>
-                
-                <div class="note-card">
-                    <h3><i class="fa-solid fa-star"></i> To An Inspiring Mentor</h3>
-                    <p><strong>Dear Veena Mam,</strong><br>
-                    On your special day, I want to thank you for your endless guidance, patience, and the wonderful energy you bring into our lives. You aren't just an amazing mentor, but a truly beautiful soul who inspires everyone around you daily!</p>
-                </div>
-
-                <div class="note-card">
-                    <h3><i class="fa-solid fa-infinity"></i> A Little Wish for You</h3>
-                    <p>May your day be filled with as much joy, laughter, and brightness as you bring to the world. I pray that this upcoming year grants you perfect health, endless happiness, and the fulfillment of all your dreams.</p>
-                </div>
-
-                <div class="note-card">
-                    <h3><i class="fa-solid fa-bolt"></i> To the Coolest Mam Ever</h3>
-                    <p>Thank you for being so supportive and making every single day brighter. I am incredibly lucky to have you in my journey. Have an absolutely fantastic and magical birthday! 🎉</p>
-                </div>
-
-                <div class="action-container">
-                    <button class="custom-btn" onclick="startMemoryShow()">
-                        Unlock Memories <i class="fa-solid fa-images"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==========================================
-             STAGE 4: AUTOMATIC FLICKERING SLIDESHOW 
-             ========================================== -->
-        <div class="page" id="page-gallery">
-            <h2 class="section-headline" style="margin-bottom: 25px;">Beautiful Memories</h2>
-            
-            <div class="slideshow-container">
-                <!-- Frame 1 -->
-                <div class="polaroid-frame">
-                    <div class="img-box">
-                        <img src="pic1.png">
-                    </div>
-                    <div class="caption">Your Beautiful Smile ✨</div>
-                </div>
-
-                <!-- Frame 2 -->
-                <div class="polaroid-frame">
-                    <div class="img-box">
-                        <img src="pic2.png" alt="Memory Two">
-                    </div>
-                    <div class="caption">Brightest Moments 🌟</div>
-                </div>
-
-                <!-- Frame 3 -->
-                <div class="polaroid-frame">
-                    <div class="img-box">
-                        <img src="pic3.png" alt="Memory Three">
-                    </div>
-                    <div class="caption">Cherished Days 💖</div>
-                </div>
-
-                <!-- Frame 4 -->
-                <div class="polaroid-frame">
-                    <div class="img-box">
-                        <img src="pic4.png" alt="Memory Four">
-                    </div>
-                    <div class="caption">Best Mentor Ever 👑</div>
-                </div>
-
-                <!-- Frame 5 -->
-                <div class="polaroid-frame">
-                    <div class="img-box">
-                        <img src="pic5.png" alt="Memory Five">
-                    </div>
-                    <div class="caption">Forever Blessed 🌸</div>
-                </div>
-            </div>
-
-            <div class="slideshow-indicator" id="slide-number">SYNCHRONIZING...</div>
-            
-            <button class="custom-btn" style="margin-top: 30px; border-color: var(--text-silver); box-shadow: none;" onclick="navigateToPage('page-hero')">
-                <i class="fa-solid fa-rotate-left"></i> Restart Journey
-            </button>
-        </div>
-
+  <!-- ADDED: Developer profile -->
+  <aside class="developer-badge" aria-label="App developer Rajnish Kumar">
+    <img
+      class="developer-photo"
+      src="rajnish-face.jpg"
+      alt="Rajnish Kumar"
+      loading="eager"
+    >
+    <div class="developer-info">
+      <div class="developer-label">Developed by</div>
+      <div class="developer-name">Rajnish Kumar</div>
     </div>
+  </aside>
 
-    <!-- Functional Scripts Matrix -->
-    <script>
-        let musicStarted = false;
-        const bgMusic = document.getElementById('bg-music');
-        const musicControl = document.getElementById('music-control');
-        const musicIcon = document.getElementById('music-icon');
+  <script>
+    const form = document.getElementById("pillForm");
 
-        // Linear Router Framework
-        function navigateToPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            const activePage = document.getElementById(pageId);
-            activePage.classList.add('active');
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
 
-            if(!musicStarted && pageId === 'page-hero') {
-                musicStarted = true;
-                musicControl.style.display = 'flex';
-                bgMusic.play().then(() => {
-                    musicIcon.className = "fa-solid fa-volume-high";
-                }).catch(() => console.log("Audio waiting for interaction loop."));
-                
-                setInterval(generateFloatingIcon, 400);
-            }
+      const morning = Number(document.getElementById("morning").value);
+      const evening = Number(document.getElementById("evening").value);
+      const night = Number(document.getElementById("night").value);
+      const duration = Number(document.getElementById("duration").value);
+      const unit = document.getElementById("unit").value;
+      const stripSize = Number(document.getElementById("stripSize").value);
 
-            if(pageId !== 'page-gallery') {
-                stopSlideshowLoop();
-            }
-        }
+      const error = document.getElementById("error");
+      const result = document.getElementById("result");
 
-        function toggleMusic() {
-            if (bgMusic.paused) {
-                bgMusic.play();
-                musicIcon.className = "fa-solid fa-volume-high";
-            } else {
-                bgMusic.pause();
-                musicIcon.className = "fa-solid fa-volume-xmark";
-            }
-        }
+      error.textContent = "";
+      error.style.display = "none";
+      result.style.display = "none";
 
-        // Blue/White Dynamic Ambient Particle System 
-        const floatSpace = document.getElementById('floating-space');
-        const particleIcons = ['✨', '💙', '🌟', '❄', '💎', '🤍'];
+      const doses = [morning, evening, night];
 
-        function generateFloatingIcon() {
-            const particle = document.createElement('span');
-            particle.classList.add('floating-element');
-            particle.innerText = particleIcons[Math.floor(Math.random() * particleIcons.length)];
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = Math.random() * 3 + 4 + 's';
-            particle.style.fontSize = Math.random() * 10 + 15 + 'px';
-            
-            floatSpace.appendChild(particle);
-            setTimeout(() => { particle.remove(); }, 7000);
-        }
+      if (
+        doses.some(d => !Number.isFinite(d) || d < 0 || d > 100) ||
+        !Number.isInteger(duration) || duration < 1 || duration > 3650 ||
+        !Number.isInteger(stripSize) || stripSize < 1 || stripSize > 1000
+      ) {
+        error.textContent =
+          "Please enter valid dose, duration, and strip values.";
+        error.style.display = "block";
+        return;
+      }
 
-        // Automatic Polaroid Card Deck Transition Framework
-        let slideshowTimer = null;
-        let activeSlideIndex = 0;
-        const frames = document.querySelectorAll('.polaroid-frame');
-        const indicator = document.getElementById('slide-number');
+      const totalDays = unit === "months" ? duration * 30 : duration;
+      const dailyTotal = morning + evening + night;
+      const totalTablets = dailyTotal * totalDays;
+      const stripsNeeded = Math.ceil(totalTablets / stripSize);
+      const extraTablets = totalTablets % stripSize;
 
-        function startMemoryShow() {
-            navigateToPage('page-gallery');
-            activeSlideIndex = 0;
-            updateSlideshowSequence();
-            
-            slideshowTimer = setInterval(() => {
-                activeSlideIndex++;
-                if(activeSlideIndex >= frames.length) {
-                    activeSlideIndex = 0;
-                }
-                updateSlideshowSequence();
-            }, 3200);
-        }
+      const format = n => Number(n.toFixed(4)).toLocaleString();
 
-        function updateSlideshowSequence() {
-            frames.forEach((frame, idx) => {
-                frame.classList.remove('current', 'past');
-                if(idx === activeSlideIndex) {
-                    frame.classList.add('current');
-                } else if (idx < activeSlideIndex) {
-                    frame.classList.add('past');
-                }
-            });
-            indicator.innerText = `PHOTO 0${activeSlideIndex + 1} // 0${frames.length}`;
-        }
+      document.getElementById("durationResult").textContent =
+        `${duration} ${unit} (${totalDays} days)`;
 
-        function stopSlideshowLoop() {
-            if(slideshowTimer) {
-                clearInterval(slideshowTimer);
-                slideshowTimer = null;
-            }
-        }
-    </script>
+      document.getElementById("dailyResult").textContent =
+        format(dailyTotal);
+
+      document.getElementById("totalResult").textContent =
+        format(totalTablets);
+
+      document.getElementById("stripSizeResult").textContent =
+        stripSize;
+
+      document.getElementById("stripsResult").textContent =
+        stripsNeeded;
+
+      document.getElementById("extraResult").textContent =
+        extraTablets === 0 ? "0" : format(extraTablets);
+
+      document.getElementById("summary").textContent =
+        `${stripsNeeded} strip${stripsNeeded === 1 ? "" : "s"} needed`;
+
+      result.style.display = "block";
+    });
+  </script>
 </body>
 </html>
+```
