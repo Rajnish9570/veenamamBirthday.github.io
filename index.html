@@ -2,723 +2,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f4f7fc">
-  <title>Pill Calculator | Smart Medical Tool</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1746b8;
-      --text: #17243b;
-      --muted: #77849a;
-      --border: #e3e9f2;
-      --surface: #ffffff;
-      --background: #f4f7fc;
-      --green: #159957;
-    }
-
-    body {
-      min-height: 100vh;
-      padding: 35px 16px;
-      font-family: Inter, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(ellipse at top left, #e2edff 0%, transparent 42%),
-        var(--background);
-      color: var(--text);
-    }
-
-    .container {
-      width: 100%;
-      max-width: 510px;
-      margin: 0 auto;
-      overflow: hidden;
-      background: var(--surface);
-      border: 1px solid #e8edf5;
-      border-radius: 24px;
-      box-shadow: 0 20px 65px rgba(35, 61, 110, 0.09);
-    }
-
-    .header {
-      padding: 30px 28px 25px;
-      background: linear-gradient(135deg, #ffffff, #f4f8ff);
-      border-bottom: 1px solid #edf1f7;
-    }
-
-    .brand-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .brand-icon {
-      display: grid;
-      place-items: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #3478f6, #1553ce);
-      color: white;
-      font-size: 23px;
-      box-shadow: 0 7px 18px #2563eb35;
-    }
-
-    .brand-name {
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 1.1px;
-      text-transform: uppercase;
-    }
-
-    .brand-caption {
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .eyebrow {
-      margin-bottom: 8px;
-      color: var(--primary);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.7px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(27px, 6vw, 34px);
-      line-height: 1.2;
-      letter-spacing: -1.2px;
-    }
-
-    .subtitle {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .content {
-      padding: 28px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .section-heading h2 {
-      font-size: 16px;
-      font-weight: 750;
-    }
-
-    .required-note {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .dose-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 11px;
-      margin-bottom: 25px;
-    }
-
-    .dose-card {
-      padding: 13px 10px;
-      background: #f8faff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      transition: border-color .2s, box-shadow .2s;
-    }
-
-    .dose-card:focus-within {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px #2563eb12;
-    }
-
-    .dose-label {
-      display: block;
-      margin-bottom: 11px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #52617a;
-    }
-
-    .dose-input {
-      width: 100%;
-      padding: 0;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: var(--text);
-      font-size: 23px;
-      font-weight: 750;
-      font-family: inherit;
-    }
-
-    label {
-      display: block;
-      margin: 17px 0 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #34435c;
-    }
-
-    .field-wrap {
-      position: relative;
-    }
-
-    input:not(.dose-input), select {
-      display: block;
-      width: 100%;
-      min-height: 49px;
-      padding: 12px 14px;
-      border: 1px solid #dce4ef;
-      border-radius: 11px;
-      outline: none;
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-      font-size: 14px;
-      transition: border-color .2s, box-shadow .2s;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px #2563eb15;
-    }
-
-    select {
-      cursor: pointer;
-    }
-
-    .field-hint {
-      margin-top: 7px;
-      color: #8995a8;
-      font-size: 11px;
-    }
-
-    .duration-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 12px;
-    }
-
-    .calculate-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      min-height: 53px;
-      margin-top: 27px;
-      padding: 14px 18px;
-      border: 0;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #3478f6, #2057d3);
-      color: #fff;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 750;
-      cursor: pointer;
-      box-shadow: 0 8px 20px #2563eb30;
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .calculate-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px #2563eb40;
-    }
-
-    .calculate-btn:active {
-      transform: translateY(0);
-    }
-
-    .btn-arrow {
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .result {
-      display: none;
-      margin-top: 28px;
-      padding: 22px;
-      border: 1px solid #d9e8ff;
-      border-radius: 17px;
-      background: linear-gradient(145deg, #f5f9ff, #ffffff);
-      animation: reveal .35s ease;
-    }
-
-    @keyframes reveal {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .result-heading {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .result-icon {
-      display: grid;
-      place-items: center;
-      width: 39px;
-      height: 39px;
-      border-radius: 12px;
-      background: #e2edff;
-      font-size: 19px;
-    }
-
-    .result-heading h3 {
-      font-size: 16px;
-    }
-
-    .result-heading p {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .total-card {
-      padding: 20px 12px;
-      text-align: center;
-      border: 1px solid #dce8ff;
-      border-radius: 14px;
-      background: white;
-    }
-
-    .total-label {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    .total {
-      margin: 8px 0;
-      color: var(--primary);
-      font-size: clamp(32px, 8vw, 42px);
-      font-weight: 850;
-      letter-spacing: -1.5px;
-    }
-
-    .total-caption {
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 750;
-    }
-
-    .result-details {
-      margin-top: 16px;
-      padding: 0 14px;
-      border-radius: 12px;
-      background: white;
-      border: 1px solid #e8edf5;
-    }
-
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid #edf1f7;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .result-row:last-child {
-      border-bottom: 0;
-    }
-
-    .result-row span {
-      color: #68768d;
-    }
-
-    .result-row strong {
-      color: #24344e;
-      text-align: right;
-      overflow-wrap: anywhere;
-    }
-
-    .error {
-      display: none;
-      margin-top: 18px;
-      padding: 12px 14px;
-      border: 1px solid #fecaca;
-      border-radius: 10px;
-      background: #fff1f2;
-      color: #b42332;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .note {
-      display: flex;
-      gap: 10px;
-      margin-top: 25px;
-      padding: 14px;
-      border: 1px solid #e7edf5;
-      border-radius: 12px;
-      background: #f8fafc;
-      color: #718096;
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-    .note-icon {
-      flex-shrink: 0;
-      font-size: 16px;
-    }
-
-    .footer {
-      padding: 16px 25px;
-      border-top: 1px solid #edf1f7;
-      text-align: center;
-      color: #97a2b3;
-      font-size: 11px;
-    }
-
-    /* ADDED: Developer profile badge */
-    .developer-badge {
-      position: fixed;
-      right: 14px;
-      bottom: 14px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      max-width: calc(100vw - 28px);
-      padding: 8px 13px 8px 8px;
-      border: 1px solid #e3e9f2;
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 5px 22px rgba(23, 36, 59, 0.14);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .developer-photo {
-      display: block;
-      flex-shrink: 0;
-      width: 39px;
-      height: 39px;
-      border: 2px solid #dce8ff;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center 38%;
-    }
-
-    .developer-info {
-      min-width: 0;
-    }
-
-    .developer-label {
-      margin-bottom: 3px;
-      color: #77849a;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .developer-name {
-      color: #17243b;
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 390px) {
-      body {
-        padding: 16px 10px;
-      }
-
-      .header, .content {
-        padding: 22px 18px;
-      }
-
-      .dose-grid {
-        gap: 7px;
-      }
-
-      .dose-card {
-        padding: 11px 7px;
-      }
-
-      .dose-input {
-        font-size: 20px;
-      }
-
-      .duration-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .developer-badge {
-        right: 10px;
-        bottom: 10px;
-        gap: 7px;
-        padding: 6px 10px 6px 6px;
-      }
-
-      .developer-photo {
-        width: 34px;
-        height: 34px;
-      }
-
-      .developer-name {
-        font-size: 11px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7d1028">
+<title>Navadurga | Nine Forms of Maa Durga</title>
+<style>
+:root {
+  --wine:#74142c; --red:#a51d35; --gold:#f5c86a;
+  --cream:#fff8eb; --ink:#351b20; --muted:#80676a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Georgia,"Noto Serif Devanagari",serif;
+  background:var(--cream);color:var(--ink);
+}
+header{
+  text-align:center;padding:42px 16px 32px;color:white;
+  background:radial-gradient(circle at top,#b7434c,var(--wine) 68%);
+  border-bottom:5px solid var(--gold);
+}
+.ornament{font-size:27px;color:var(--gold)}
+header h1{font-size:clamp(30px,6vw,52px);margin:12px 0}
+header p{max-width:700px;margin:10px auto;line-height:1.8}
+.controls{
+  display:flex;justify-content:center;align-items:center;
+  gap:12px;flex-wrap:wrap;padding:20px 12px;
+  position:sticky;top:0;z-index:5;background:#fff8ebed;
+  border-bottom:1px solid #ead8c5;backdrop-filter:blur(10px);
+}
+select,input,button{
+  font:inherit;border-radius:10px;padding:11px 14px;
+  border:1px solid #d9b7a4;background:white;color:var(--ink);
+}
+button{cursor:pointer}
+button:hover{filter:brightness(.96)}
+select:focus,input:focus,button:focus-visible{
+  outline:2px solid var(--gold);outline-offset:3px;
+}
+#search{width:min(300px,90vw)}
+main{max-width:1150px;margin:auto;padding:22px 16px 50px}
+.section-title{text-align:center;color:var(--wine);margin:12px 0 24px}
+.grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+}
+.card{
+  background:white;border:1px solid #eddcc7;border-radius:17px;
+  padding:20px 15px;text-align:center;cursor:pointer;
+  box-shadow:0 5px 18px #5613260b;transition:.2s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 25px #56132618}
+.card .symbol{font-size:39px}
+.card .day{color:var(--red);font-size:13px;letter-spacing:1px}
+.card h3{color:var(--wine);margin:9px 0 5px;font-size:21px}
+.card .hindi{font-size:19px}
+.card p{color:var(--muted);line-height:1.65;font-size:14px}
+.read{color:var(--red);font-weight:bold}
+#details{
+  display:none;background:white;border:1px solid #e8c99c;
+  border-radius:20px;padding:clamp(18px,4vw,38px);
+  margin-top:32px;box-shadow:0 10px 35px #56132610;
+}
+.detail-head{text-align:center;border-bottom:1px solid #ead9c5;padding-bottom:20px}
+.detail-head .symbol{font-size:58px}
+.detail-head h2{font-size:clamp(25px,5vw,38px);color:var(--wine);margin:8px 0}
+.detail-head p{line-height:1.8}
+.badge{display:inline-block;background:#fff1d3;color:#713a16;padding:7px 12px;border-radius:30px;margin:4px;font-size:14px}
+.note-section{margin-top:24px;line-height:1.9}
+.note-section h3{color:var(--red);border-bottom:1px solid #f0e2d5;padding-bottom:7px}
+.note-section p{white-space:pre-line}
+.mantra{
+  background:#fff5e2;border-left:4px solid var(--gold);
+  padding:16px;border-radius:8px;line-height:1.9;
+}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.primary{background:var(--wine);color:white;border-color:var(--wine)}
+.secondary{background:#fff3dc}
+.empty{text-align:center;padding:30px;grid-column:1/-1}
+footer{
+  text-align:center;background:#4e1021;color:#fff0d6;
+  padding:27px 15px;line-height:1.8
+}
+footer span{color:var(--gold)}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:16px 9px}}
+@media(max-width:430px){.grid{grid-template-columns:1fr}.controls{position:static}.card{padding:19px}}
+@media print{
+  header,.controls,.actions,footer,.grid,.section-title{display:none!important}
+  #details{display:block!important;border:0;box-shadow:none}
+  body{background:white}
+}
+</style>
 </head>
-
 <body>
-  <main class="container">
 
-    <header class="header">
-      <div class="brand-row">
-        <div class="brand-icon" aria-hidden="true">✚</div>
-        <div>
-          <div class="brand-name">MediCalc</div>
-          <div class="brand-caption">Smart healthcare utilities</div>
-        </div>
-      </div>
+<header>
+  <div class="ornament">❋ ॐ ❋</div>
+  <h1 id="heroTitle">Navadurga</h1>
+  <p id="heroText">Nine Divine Forms of Maa Durga · A devotional guide to their stories, sacred symbols, mantras and spiritual significance.</p>
+  <div class="ornament">✦ जय माता दी ✦</div>
+</header>
 
-      <p class="eyebrow">Dosage planning tool</p>
-      <h1>Pill & Strip<br>Calculator</h1>
-      <p class="subtitle">
-        Calculate your total tablets and required strips
-        based on your prescribed daily dosage.
-      </p>
-    </header>
+<div class="controls">
+  <label for="language" id="languageLabel">Choose Language</label>
+  <select id="language" aria-label="Choose language">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+  </select>
+  <input id="search" type="search" placeholder="Search an avatar..." aria-label="Search avatars">
+  <button class="secondary" id="allBtn">All 9 Avatars</button>
+</div>
 
-    <div class="content">
-      <form id="pillForm">
-        <div class="section-heading">
-          <h2>01. Daily dosage</h2>
-          <span class="required-note">Enter tablets per dose</span>
-        </div>
+<main>
+  <h2 class="section-title" id="listTitle">Explore the Nine Forms</h2>
+  <div class="grid" id="grid"></div>
 
-        <div class="dose-grid">
-          <div class="dose-card">
-            <label class="dose-label" for="morning">☀ Morning</label>
-            <input class="dose-input" type="number" id="morning"
-              min="0" max="100" step="0.5" value="1" required>
-          </div>
-
-          <div class="dose-card">
-            <label class="dose-label" for="evening">◷ Evening</label>
-            <input class="dose-input" type="number" id="evening"
-              min="0" max="100" step="0.5" value="1" required>
-          </div>
-
-          <div class="dose-card">
-            <label class="dose-label" for="night">☾ Night</label>
-            <input class="dose-input" type="number" id="night"
-              min="0" max="100" step="0.5" value="0" required>
-          </div>
-        </div>
-
-        <div class="section-heading">
-          <h2>02. Treatment period</h2>
-        </div>
-
-        <div class="duration-grid">
-          <div>
-            <label for="duration">Duration</label>
-            <input type="number" id="duration" min="1"
-              max="3650" step="1" value="30" required>
-          </div>
-
-          <div>
-            <label for="unit">Time unit</label>
-            <select id="unit">
-              <option value="days">Days</option>
-              <option value="months">Months</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="section-heading" style="margin-top:28px;margin-bottom:0">
-          <h2>03. Packaging details</h2>
-        </div>
-
-        <label for="stripSize">Tablets per strip</label>
-        <input type="number" id="stripSize" min="1"
-          max="1000" step="1" value="10" required>
-        <p class="field-hint">
-          Enter the number of tablets in one complete strip.
-        </p>
-
-        <button class="calculate-btn" type="submit">
-          Calculate requirement
-          <span class="btn-arrow" aria-hidden="true">→</span>
-        </button>
-      </form>
-
-      <section class="result" id="result" aria-live="polite">
-        <div class="result-heading">
-          <div class="result-icon" aria-hidden="true">📊</div>
-          <div>
-            <h3>Calculation summary</h3>
-            <p>Your estimated tablet requirement</p>
-          </div>
-        </div>
-
-        <div class="total-card">
-          <div class="total-label">Total tablets required</div>
-          <div class="total" id="totalResult"></div>
-          <div class="total-caption" id="summary"></div>
-        </div>
-
-        <div class="result-details">
-          <div class="result-row">
-            <span>Total duration</span>
-            <strong id="durationResult"></strong>
-          </div>
-
-          <div class="result-row">
-            <span>Tablets per day</span>
-            <strong id="dailyResult"></strong>
-          </div>
-
-          <div class="result-row">
-            <span>Tablets per strip</span>
-            <strong id="stripSizeResult"></strong>
-          </div>
-
-          <div class="result-row">
-            <span>Strips required</span>
-            <strong id="stripsResult"></strong>
-          </div>
-
-          <div class="result-row">
-            <span>Extra tablets after full strips</span>
-            <strong id="extraResult"></strong>
-          </div>
-        </div>
-      </section>
-
-      <p class="error" id="error" role="alert"></p>
-
-      <div class="note">
-        <span class="note-icon" aria-hidden="true">ⓘ</span>
-        <span>
-          Month calculation uses 30 days per month. Strip quantity
-          is rounded up to ensure enough tablets. This calculator
-          is for quantity estimation only. Follow your doctor's
-          prescribed dosage.
-        </span>
-      </div>
+  <article id="details">
+    <div class="actions">
+      <button class="secondary" id="backBtn">← Back to all avatars</button>
     </div>
-
-    <footer class="footer">
-      MediCalc · Simple tools for everyday healthcare
-    </footer>
-  </main>
-
-  <!-- ADDED: Developer profile -->
-  <aside class="developer-badge" aria-label="App developer Rajnish Kumar">
-    <img
-      class="developer-photo"
-      src="Screenshot_20261013-130100.Gallery.png"
-      alt="Rajnish Kumar"
-      loading="eager"
-    >
-    <div class="developer-info">
-      <div class="developer-label">Developed by</div>
-      <div class="developer-name">Rajnish Kumar</div>
+    <div id="detailContent"></div>
+    <div class="actions">
+      <button class="primary" id="prevBtn">← Previous</button>
+      <button class="secondary" id="printBtn">Print / Save PDF</button>
+      <button class="primary" id="nextBtn">Next →</button>
     </div>
-  </aside>
+  </article>
+</main>
 
-  <script>
-    const form = document.getElementById("pillForm");
+<footer>
+  <div style="font-size:25px;color:#f5c86a">॥ जय माता दी ॥</div>
+  <p id="footerText">May Maa Durga bless every home with courage, wisdom, peace and prosperity.</p>
+  <span>ॐ दुं दुर्गायै नमः</span>
+</footer>
 
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const morning = Number(document.getElementById("morning").value);
-      const evening = Number(document.getElementById("evening").value);
-      const night = Number(document.getElementById("night").value);
-      const duration = Number(document.getElementById("duration").value);
-      const unit = document.getElementById("unit").value;
-      const stripSize = Number(document.getElementById("stripSize").value);
-
-      const error = document.getElementById("error");
-      const result = document.getElementById("result");
-
-      error.textContent = "";
-      error.style.display = "none";
-      result.style.display = "none";
-
-      const doses = [morning, evening, night];
-
-      if (
-        doses.some(d => !Number.isFinite(d) || d < 0 || d > 100) ||
-        !Number.isInteger(duration) || duration < 1 || duration > 3650 ||
-        !Number.isInteger(stripSize) || stripSize < 1 || stripSize > 1000
-      ) {
-        error.textContent =
-          "Please enter valid dose, duration, and strip values.";
-        error.style.display = "block";
-        return;
-      }
-
-      const totalDays = unit === "months" ? duration * 30 : duration;
-      const dailyTotal = morning + evening + night;
-      const totalTablets = dailyTotal * totalDays;
-      const stripsNeeded = Math.ceil(totalTablets / stripSize);
-      const extraTablets = totalTablets % stripSize;
-
-      const format = n => Number(n.toFixed(4)).toLocaleString();
-
-      document.getElementById("durationResult").textContent =
-        `${duration} ${unit} (${totalDays} days)`;
-
-      document.getElementById("dailyResult").textContent =
-        format(dailyTotal);
-
-      document.getElementById("totalResult").textContent =
-        format(totalTablets);
-
-      document.getElementById("stripSizeResult").textContent =
-        stripSize;
-
-      document.getElementById("stripsResult").textContent =
-        stripsNeeded;
-
-      document.getElementById("extraResult").textContent =
-        extraTablets === 0 ? "0" : format(extraTablets);
-
-      document.getElementById("summary").textContent =
-        `${stripsNeeded} strip${stripsNeeded === 1 ? "" : "s"} needed`;
-
-      result.style.display = "block";
-    });
-  </script>
-</body>
-</html>
-
+<script>
+const deities = [
+{
+ name:"Shailputri", hi:"माँ शैलपुत्री", day:1, symbol:"🏔️",
+ meaning:"Daughter of the Mountain",
+ mantra:"ॐ देवी शैलपुत्र्यै नमः।",
+ mount:"Bull (Nandi)", weapons:"Trident and lotus",
+ intro:"Maa Shailputri represents a strong beginning, purity and a deep connection with nature.",
+ story:"According to Hindu tradition, Shailputri is the daughter of Himavan, the personification of the Himalayas. She is associated with Goddess Parvati and is worshipped as the first form of Navadurga. Her story recalls the divine power taking birth in the mountains and beginning a journey of devotion.",
+ form:"She is commonly depicted riding a white bull, holding a trident in one hand and a lotus in the other. The crescent moon is traditionally associated with her crown.",
+ significance:"Her form represents stability, courage, purity and the strength to begin a meaningful journey. Devotees pray for a firm mind and a peaceful life.",
+ worship:"Worshipped on the first day of Navratri. Devotees offer flowers, perform aarti and pray with sincerity. Practices and offerings may differ among families and regions.",
+ en:"Maa Shailputri teaches us to remain grounded, courageous and faithful even when beginning something difficult.",
+ nameHi:"माँ शैलपुत्री",
+ meaningHi:"पर्वतराज हिमालय की पुत्री",
+ mountHi:"वृषभ (नंदी)",
+ weaponsHi:"त्रिशूल और कमल",
+ introHi:"माँ शैलपुत्री दृढ़ता, पवित्रता और प्रकृति से जुड़ाव का प्रतीक हैं।",
+ storyHi:"हिंदू परंपरा के अनुसार, माँ शैलपुत्री पर्वतराज हिमालय की पुत्री हैं। उन्हें माँ पार्वती का स्वरूप माना जाता है और वे नवदुर्गा का पहला रूप हैं। उनकी कथा दिव्य शक्ति के पर्वतों में जन्म लेने और भक्ति की यात्रा आरंभ करने का स्मरण कराती है।",
+ formHi:"माँ को सामान्यतः सफेद वृषभ पर विराजमान दिखाया जाता है। उनके एक हाथ में त्रिशूल और दूसरे में कमल होता है। उनके मुकुट पर अर्धचंद्र का वर्णन भी मिलता है।",
+ significanceHi:"उनका स्वरूप स्थिरता, साहस, पवित्रता और नए कार्य की शुरुआत करने की शक्ति का प्रतीक है। भक्त दृढ़ मन और शांतिपूर्ण जीवन के लिए प्रार्थना करते हैं।",
+ worshipHi:"नवरात्रि के पहले दिन इनकी पूजा की जाती है। भक्त फूल अर्पित करते हैं, आरती करते हैं और श्रद्धा से प्रार्थना करते हैं। पूजा की परंपराएँ परिवार और क्षेत्र के अनुसार अलग हो सकती हैं।",
+ enHi:"माँ शैलपुत्री हमें सिखाती हैं कि कठिन शुरुआत में भी अपने विश्वास, साहस और धैर्य को बनाए रखना चाहिए।"
+},
+{
+ name:"Brahmacharini",hi:"माँ ब्रह्मचारिणी",day:2,symbol:"📿",
+ meaning:"Goddess of Devotion and Penance",mantra:"ॐ देवी ब्रह्मचारिण्यै नमः।",
+ mount:"Traditionally depicted walking; no animal mount",weapons:"Rosary and water pot",
+ intro:"Maa Brahmacharini represents devotion, discipline, patience and spiritual determination.",
+ story:"In this form, Goddess Parvati is remembered for her deep penance and unwavering devotion to Lord Shiva. Her story teaches that sincere effort and self-discipline help a person remain committed to a worthy goal.",
+ form:"She is generally shown in simple white garments, holding a rosary in one hand and a kamandalu, or water pot, in the other.",
+ significance:"Her qualities include patience, self-control, dedication and inner strength. She reminds devotees that meaningful achievements often require perseverance.",
+ worship:"Worshipped on the second day of Navratri. Devotees offer prayers and seek strength to follow the right path with sincerity.",
+ en:"Her message is to remain patient, disciplined and devoted to your responsibilities.",
+ nameHi:"माँ ब्रह्मचारिणी",meaningHi:"तपस्या और ब्रह्मचर्य का पालन करने वाली देवी",
+ mountHi:"परंपरागत रूप से पैदल चलती हुई दर्शाई जाती हैं; कोई पशु वाहन नहीं",
+ weaponsHi:"जपमाला और कमंडल",
+ introHi:"माँ ब्रह्मचारिणी भक्ति, अनुशासन, धैर्य और आध्यात्मिक दृढ़ता का प्रतीक हैं।",
+ storyHi:"इस स्वरूप में माँ पार्वती को भगवान शिव को प्राप्त करने के लिए कठोर तपस्या और अटूट भक्ति करते हुए स्मरण किया जाता है। उनकी कथा सिखाती है कि सच्चा प्रयास और आत्म-अनुशासन हमें अपने लक्ष्य के प्रति समर्पित रखते हैं।",
+ formHi:"उन्हें सामान्यतः साधारण सफेद वस्त्रों में दिखाया जाता है। उनके एक हाथ में जपमाला और दूसरे हाथ में कमंडल होता है।",
+ significanceHi:"उनके गुण धैर्य, संयम, समर्पण और आंतरिक शक्ति हैं। वे याद दिलाती हैं कि महत्वपूर्ण उपलब्धियों के लिए निरंतर प्रयास आवश्यक है।",
+ worshipHi:"नवरात्रि के दूसरे दिन इनकी पूजा होती है। भक्त सही मार्ग पर चलने और अपने कर्तव्यों को निष्ठा से निभाने की शक्ति माँगते हैं।",
+ enHi:"उनका संदेश है कि धैर्य रखें, अनुशासित रहें और अपने कर्तव्यों के प्रति समर्पित रहें।"
+},
+{
+ name:"Chandraghanta",hi:"माँ चंद्रघंटा",day:3,symbol:"🔔",
+ meaning:"The Goddess with the Crescent Bell",mantra:"ॐ देवी चन्द्रघण्टायै नमः।",
+ mount:"Lion or tiger in common depictions",weapons:"Various weapons and a hand in blessing",
+ intro:"Maa Chandraghanta represents courage, alertness and the protection of devotees.",
+ story:"After her marriage to Lord Shiva, Goddess Parvati is worshipped in this form with a crescent-shaped bell on her forehead. Her fierce yet compassionate appearance symbolizes readiness to oppose injustice and protect the innocent.",
+ form:"She is often depicted with a golden glow, a crescent shaped like a bell, several arms and a lion or tiger.",
+ significance:"She unites bravery with compassion. Her form reminds devotees that strength should be used to protect others and stand against wrongdoing.",
+ worship:"Worshipped on the third day of Navratri. Devotees pray for courage, peace and protection.",
+ en:"Be brave when facing challenges, but let compassion guide your actions.",
+ nameHi:"माँ चंद्रघंटा",meaningHi:"मस्तक पर घंटे के आकार का अर्धचंद्र धारण करने वाली देवी",
+ mountHi:"सिंह या बाघ",weaponsHi:"विभिन्न अस्त्र-शस्त्र और आशीर्वाद देने वाला हाथ",
+ introHi:"माँ चंद्रघंटा साहस, सजगता और भक्तों की रक्षा का प्रतीक हैं।",
+ storyHi:"भगवान शिव से विवाह के बाद माँ पार्वती के इस स्वरूप को मस्तक पर घंटे के आकार का अर्धचंद्र धारण करने के कारण चंद्रघंटा कहा जाता है। उनका उग्र और करुणामय स्वरूप अन्याय का सामना करने और निर्दोषों की रक्षा करने की तत्परता दर्शाता है।",
+ formHi:"उन्हें प्रायः सुनहरी आभा, घंटे के आकार के अर्धचंद्र, अनेक भुजाओं और सिंह या बाघ के साथ दर्शाया जाता है।",
+ significanceHi:"वे साहस और करुणा का संगम हैं। उनका स्वरूप सिखाता है कि शक्ति का उपयोग दूसरों की रक्षा और अन्याय के विरोध में करना चाहिए।",
+ worshipHi:"नवरात्रि के तीसरे दिन इनकी पूजा होती है। भक्त साहस, शांति और रक्षा के लिए प्रार्थना करते हैं।",
+ enHi:"कठिनाइयों का सामना साहस से करें, लेकिन अपने व्यवहार में करुणा बनाए रखें।"
+},
+{
+ name:"Kushmanda",hi:"माँ कूष्माण्डा",day:4,symbol:"☀️",
+ meaning:"The Creator of Cosmic Energy",mantra:"ॐ देवी कूष्माण्डायै नमः।",
+ mount:"Lion",weapons:"Eight arms with traditional divine objects",
+ intro:"Maa Kushmanda is associated with creation, radiance, vitality and cosmic energy.",
+ story:"In Hindu devotional tradition, Maa Kushmanda is believed to have created the universe through her divine smile, bringing light where there was darkness. Her name is associated in popular explanations with the cosmic egg or universe.",
+ form:"She is commonly depicted with eight arms, a radiant appearance and a lion as her vehicle. Her hands carry different sacred objects.",
+ significance:"She represents creative power, optimism, life-giving energy and abundance. Devotees remember her as a source of light and vitality.",
+ worship:"Worshipped on the fourth day of Navratri. Devotees offer prayers for health, energy and well-being.",
+ en:"Her form encourages optimism, creativity and gratitude for the energy that sustains life.",
+ nameHi:"माँ कूष्माण्डा",meaningHi:"सृष्टि और ब्रह्मांडीय ऊर्जा से जुड़ी देवी",
+ mountHi:"सिंह",weaponsHi:"आठ भुजाओं में विभिन्न दिव्य वस्तुएँ",
+ introHi:"माँ कूष्माण्डा सृष्टि, प्रकाश, जीवनशक्ति और ब्रह्मांडीय ऊर्जा से जुड़ी हैं।",
+ storyHi:"हिंदू भक्ति परंपरा में माना जाता है कि माँ कूष्माण्डा ने अपनी दिव्य मुस्कान से ब्रह्मांड की रचना की और अंधकार में प्रकाश उत्पन्न किया। लोकप्रिय व्याख्याओं में उनके नाम को ब्रह्मांडीय अंडे या सृष्टि से जोड़ा जाता है।",
+ formHi:"उन्हें सामान्यतः आठ भुजाओं, तेजस्वी आभा और सिंह के साथ दर्शाया जाता है। उनके हाथों में विभिन्न पवित्र वस्तुएँ होती हैं।",
+ significanceHi:"वे सृजनशक्ति, आशावाद, जीवनदायी ऊर्जा और समृद्धि का प्रतीक हैं। भक्त उन्हें प्रकाश और जीवनशक्ति का स्रोत मानते हैं।",
+ worshipHi:"नवरात्रि के चौथे दिन इनकी पूजा होती है। भक्त स्वास्थ्य, ऊर्जा और कल्याण के लिए प्रार्थना करते हैं।",
+ enHi:"उनका स्वरूप आशावादी रहने, रचनात्मक सोचने और जीवन की ऊर्जा के प्रति आभार रखने की प्रेरणा देता है।"
+},
+{
+ name:"Skandamata",hi:"माँ स्कंदमाता",day:5,symbol:"🪷",
+ meaning:"Mother of Skanda (Kartikeya)",mantra:"ॐ देवी स्कन्दमातायै नमः।",
+ mount:"Lion",weapons:"Lotuses; often shown holding child Skanda",
+ intro:"Maa Skandamata represents motherhood, compassion, love and protection.",
+ story:"Maa Skandamata is the mother of Lord Skanda, also known as Kartikeya, the divine commander of the gods. Her form expresses a mother's loving protection and the strength that comes with caring for others.",
+ form:"She is commonly depicted seated on a lotus or riding a lion, with the child Skanda in her lap and lotus flowers in her hands.",
+ significance:"She symbolizes unconditional love, maternal care, peace and responsibility. Her image joins tenderness with divine strength.",
+ worship:"Worshipped on the fifth day of Navratri. Devotees seek family well-being, harmony and blessings for children.",
+ en:"Her form reminds us that love and protection are powerful expressions of strength.",
+ nameHi:"माँ स्कंदमाता",meaningHi:"भगवान स्कंद (कार्तिकेय) की माता",
+ mountHi:"सिंह; कुछ चित्रणों में कमल पर विराजमान",
+ weaponsHi:"कमल के फूल; गोद में बाल स्कंद",
+ introHi:"माँ स्कंदमाता मातृत्व, करुणा, प्रेम और रक्षा का प्रतीक हैं।",
+ storyHi:"माँ स्कंदमाता भगवान स्कंद, जिन्हें कार्तिकेय भी कहा जाता है, की माता हैं। भगवान स्कंद देवताओं के सेनापति माने जाते हैं। उनका स्वरूप माँ के स्नेह, सुरक्षा और दूसरों की देखभाल में निहित शक्ति को दर्शाता है।",
+ formHi:"उन्हें सामान्यतः कमल पर विराजमान या सिंह पर सवार दिखाया जाता है। उनकी गोद में बाल स्कंद और हाथों में कमल के फूल होते हैं।",
+ significanceHi:"वे निःस्वार्थ प्रेम, मातृ-स्नेह, शांति और जिम्मेदारी का प्रतीक हैं। उनका स्वरूप कोमलता और दिव्य शक्ति को एक साथ दर्शाता है।",
+ worshipHi:"नवरात्रि के पाँचवें दिन इनकी पूजा होती है। भक्त परिवार की सुख-शांति और बच्चों के कल्याण के लिए प्रार्थना करते हैं।",
+ enHi:"उनका स्वरूप याद दिलाता है कि प्रेम और सुरक्षा भी शक्ति के महान रूप हैं।"
+},
+{
+ name:"Katyayani",hi:"माँ कात्यायनी",day:6,symbol:"🦁",
+ meaning:"The Warrior Goddess",mantra:"ॐ देवी कात्यायन्यै नमः।",
+ mount:"Lion",weapons:"Traditional depictions include a sword and lotus",
+ intro:"Maa Katyayani represents righteous courage, justice and the power to overcome evil.",
+ story:"According to a well-known Hindu tradition, the Goddess manifested as Katyayani to defeat the buffalo demon Mahishasura. She is associated with the sage Katyayana in accounts of her birth and worship.",
+ form:"She is often shown with four arms, a radiant appearance and a lion. Her hands may hold a sword and lotus while other hands show blessings.",
+ significance:"Her form symbolizes justice, confidence, determination and the protection of the innocent. She teaches that courage must serve righteousness.",
+ worship:"Worshipped on the sixth day of Navratri. Devotees offer prayers for courage, clarity and strength to overcome obstacles.",
+ en:"Stand up for what is right with confidence, discipline and compassion.",
+ nameHi:"माँ कात्यायनी",meaningHi:"दुष्ट शक्तियों का संहार करने वाली योद्धा देवी",
+ mountHi:"सिंह",weaponsHi:"परंपरागत चित्रणों में तलवार और कमल",
+ introHi:"माँ कात्यायनी धर्म, न्याय, साहस और बुराई पर विजय की शक्ति का प्रतीक हैं।",
+ storyHi:"एक प्रसिद्ध हिंदू परंपरा के अनुसार, महिषासुर का वध करने के लिए देवी ने कात्यायनी स्वरूप धारण किया। उनके जन्म और पूजा की कथाओं में महर्षि कात्यायन का उल्लेख मिलता है।",
+ formHi:"उन्हें प्रायः चार भुजाओं, तेजस्वी स्वरूप और सिंह के साथ दर्शाया जाता है। उनके हाथों में तलवार और कमल हो सकते हैं, जबकि अन्य हाथ आशीर्वाद देते हैं।",
+ significanceHi:"उनका स्वरूप न्याय, आत्मविश्वास, दृढ़ संकल्प और निर्दोषों की रक्षा का प्रतीक है। वे सिखाती हैं कि साहस का उपयोग धर्म की रक्षा के लिए होना चाहिए।",
+ worshipHi:"नवरात्रि के छठे दिन इनकी पूजा होती है। भक्त साहस, स्पष्टता और बाधाओं पर विजय पाने की शक्ति के लिए प्रार्थना करते हैं।",
+ enHi:"आत्मविश्वास, अनुशासन और करुणा के साथ सही बात के लिए खड़े रहें।"
+},
+{
+ name:"Kalaratri",hi:"माँ कालरात्रि",day:7,symbol:"🌌",
+ meaning:"The Destroyer of Darkness and Fear",mantra:"ॐ देवी कालरात्र्यै नमः।",
+ mount:"Donkey",weapons:"Traditional depictions show a sword and iron weapon",
+ intro:"Maa Kalaratri represents fearlessness, protection and the destruction of ignorance and evil.",
+ story:"Kalaratri is regarded as one of the fiercest forms of the Goddess. Her frightening appearance represents the power to face darkness and destroy harmful forces rather than a threat to sincere devotees.",
+ form:"She is commonly depicted with a dark complexion, dishevelled hair, a radiant or fiery aura and a donkey as her vehicle. Her hands display protective gestures and traditional weapons.",
+ significance:"She symbolizes fearlessness, transformation and protection in difficult times. Her fierce appearance carries a message of courage and the triumph of good.",
+ worship:"Worshipped on the seventh day of Navratri. Devotees pray for protection, strength and freedom from fear.",
+ en:"Do not let fear control your life. Face difficulties with faith and courage.",
+ nameHi:"माँ कालरात्रि",meaningHi:"अंधकार, भय और दुष्ट शक्तियों का नाश करने वाली देवी",
+ mountHi:"गधा",weaponsHi:"परंपरागत चित्रणों में तलवार और लोहे का अस्त्र",
+ introHi:"माँ कालरात्रि निर्भयता, रक्षा तथा अज्ञान और बुराई के विनाश का प्रतीक हैं।",
+ storyHi:"कालरात्रि को देवी के सबसे उग्र स्वरूपों में गिना जाता है। उनका भयानक दिखाई देने वाला स्वरूप अंधकार का सामना करने और हानिकारक शक्तियों का नाश करने की क्षमता दर्शाता है। वे सच्चे भक्तों की रक्षक मानी जाती हैं।",
+ formHi:"उन्हें सामान्यतः श्याम वर्ण, खुले बालों, तेजस्वी आभा और गधे के साथ दर्शाया जाता है। उनके हाथों में पारंपरिक अस्त्र और रक्षा का संकेत देने वाली मुद्राएँ होती हैं।",
+ significanceHi:"वे निर्भयता, परिवर्तन और कठिन समय में रक्षा का प्रतीक हैं। उनका उग्र स्वरूप साहस और अच्छाई की विजय का संदेश देता है।",
+ worshipHi:"नवरात्रि के सातवें दिन इनकी पूजा होती है। भक्त रक्षा, शक्ति और भय से मुक्ति के लिए प्रार्थना करते हैं।",
+ enHi:"भय को अपने जीवन पर हावी न होने दें। विश्वास और साहस के साथ कठिनाइयों का सामना करें।"
+},
+{
+ name:"Mahagauri",hi:"माँ महागौरी",day:8,symbol:"🤍",
+ meaning:"The Goddess of Purity and Peace",mantra:"ॐ देवी महागौर्यै नमः।",
+ mount:"Bull (Nandi)",weapons:"Trident and damaru in common depictions",
+ intro:"Maa Mahagauri represents purity, peace, compassion and renewal.",
+ story:"In devotional accounts, Mahagauri is associated with the purity and radiant beauty of Goddess Parvati after intense penance. Her story is remembered as a symbol of spiritual purification and renewed grace.",
+ fo
