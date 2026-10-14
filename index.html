@@ -4,186 +4,501 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#7d1028">
-<title>Navadurga | Nine Forms of Maa Durga</title>
+<meta name="theme-color" content="#080d1b">
+<meta name="description" content="Rajnish Kumar's personal developer portfolio.">
+<title>Rajnish Kumar | Developer Portfolio</title>
+
 <style>
 :root {
-  --wine:#74142c; --red:#a51d35; --gold:#f5c86a;
-  --cream:#fff8eb; --ink:#351b20; --muted:#80676a;
+  --bg: #080d1b;
+  --panel: #10182b;
+  --text: #f3f6ff;
+  --muted: #a0abc2;
+  --blue: #69a7ff;
+  --cyan: #63f2e4;
+  --border: rgba(255,255,255,.11);
 }
-*{box-sizing:border-box}
-body{
-  margin:0;font-family:Georgia,"Noto Serif Devanagari",serif;
-  background:var(--cream);color:var(--ink);
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
 }
-header{
-  text-align:center;padding:42px 16px 32px;color:white;
-  background:radial-gradient(circle at top,#b7434c,var(--wine) 68%);
-  border-bottom:5px solid var(--gold);
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+.container { width: min(1100px, 90%); margin: auto; }
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,13,27,.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
-.ornament{font-size:27px;color:var(--gold)}
-header h1{font-size:clamp(30px,6vw,52px);margin:12px 0}
-header p{max-width:700px;margin:10px auto;line-height:1.8}
-.controls{
-  display:flex;justify-content:center;align-items:center;
-  gap:12px;flex-wrap:wrap;padding:20px 12px;
-  position:sticky;top:0;z-index:5;background:#fff8ebed;
-  border-bottom:1px solid #ead8c5;backdrop-filter:blur(10px);
+.nav {
+  min-height: 72px; display: flex;
+  align-items: center; justify-content: space-between;
+  gap: 20px;
 }
-select,input,button{
-  font:inherit;border-radius:10px;padding:11px 14px;
-  border:1px solid #d9b7a4;background:white;color:var(--ink);
+.logo { font-size: 22px; font-weight: 850; letter-spacing: -1px; }
+.logo span { color: var(--cyan); }
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-links a { color: var(--muted); font-size: 14px; transition: .2s; }
+.nav-links a:hover { color: var(--cyan); }
+.menu-btn {
+  display: none; border: 1px solid var(--border);
+  color: var(--text); background: var(--panel);
+  padding: 6px 12px; border-radius: 9px;
 }
-button{cursor:pointer}
-button:hover{filter:brightness(.96)}
-select:focus,input:focus,button:focus-visible{
-  outline:2px solid var(--gold);outline-offset:3px;
+.hero {
+  min-height: 83vh; display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center; gap: 55px; padding: 80px 0;
 }
-#search{width:min(300px,90vw)}
-main{max-width:1150px;margin:auto;padding:22px 16px 50px}
-.section-title{text-align:center;color:var(--wine);margin:12px 0 24px}
-.grid{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+.eyebrow {
+  color: var(--cyan); font-size: 12px;
+  letter-spacing: 3px; font-weight: 800;
+  text-transform: uppercase;
 }
-.card{
-  background:white;border:1px solid #eddcc7;border-radius:17px;
-  padding:20px 15px;text-align:center;cursor:pointer;
-  box-shadow:0 5px 18px #5613260b;transition:.2s;
+h1 {
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 1.08; letter-spacing: -3px;
+  margin: 20px 0;
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 10px 25px #56132618}
-.card .symbol{font-size:39px}
-.card .day{color:var(--red);font-size:13px;letter-spacing:1px}
-.card h3{color:var(--wine);margin:9px 0 5px;font-size:21px}
-.card .hindi{font-size:19px}
-.card p{color:var(--muted);line-height:1.65;font-size:14px}
-.read{color:var(--red);font-weight:bold}
-#details{
-  display:none;background:white;border:1px solid #e8c99c;
-  border-radius:20px;padding:clamp(18px,4vw,38px);
-  margin-top:32px;box-shadow:0 10px 35px #56132610;
+.gradient {
+  background: linear-gradient(100deg, var(--blue), var(--cyan));
+  color: transparent; background-clip: text;
 }
-.detail-head{text-align:center;border-bottom:1px solid #ead9c5;padding-bottom:20px}
-.detail-head .symbol{font-size:58px}
-.detail-head h2{font-size:clamp(25px,5vw,38px);color:var(--wine);margin:8px 0}
-.detail-head p{line-height:1.8}
-.badge{display:inline-block;background:#fff1d3;color:#713a16;padding:7px 12px;border-radius:30px;margin:4px;font-size:14px}
-.note-section{margin-top:24px;line-height:1.9}
-.note-section h3{color:var(--red);border-bottom:1px solid #f0e2d5;padding-bottom:7px}
-.note-section p{white-space:pre-line}
-.mantra{
-  background:#fff5e2;border-left:4px solid var(--gold);
-  padding:16px;border-radius:8px;line-height:1.9;
+.hero p, .section-intro { color: var(--muted); max-width: 570px; }
+.actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
+.btn {
+  display: inline-flex; justify-content: center; align-items: center;
+  padding: 12px 20px; border-radius: 10px;
+  font-weight: 750; font-size: 14px; transition: .25s;
 }
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0}
-.primary{background:var(--wine);color:white;border-color:var(--wine)}
-.secondary{background:#fff3dc}
-.empty{text-align:center;padding:30px;grid-column:1/-1}
-footer{
-  text-align:center;background:#4e1021;color:#fff0d6;
-  padding:27px 15px;line-height:1.8
+.btn-primary { background: var(--cyan); color: #07131b; }
+.btn-secondary { border: 1px solid var(--border); background: var(--panel); }
+.btn:hover { transform: translateY(-3px); }
+.hero-art {
+  min-height: 330px; display: grid; place-items: center;
+  position: relative;
 }
-footer span{color:var(--gold)}
-@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:16px 9px}}
-@media(max-width:430px){.grid{grid-template-columns:1fr}.controls{position:static}.card{padding:19px}}
-@media print{
-  header,.controls,.actions,footer,.grid,.section-title{display:none!important}
-  #details{display:block!important;border:0;box-shadow:none}
-  body{background:white}
+.orbit {
+  width: min(300px, 75vw); aspect-ratio: 1;
+  border-radius: 50%; border: 1px solid rgba(99,242,228,.28);
+  display: grid; place-items: center; position: relative;
+  box-shadow: 0 0 80px rgba(105,167,255,.08);
+}
+.orbit::before, .orbit::after {
+  content: ""; position: absolute; border-radius: 50%;
+  border: 1px dashed rgba(105,167,255,.4);
+}
+.orbit::before { inset: 22px; }
+.orbit::after { inset: 45px; }
+.code-card {
+  width: 72%; padding: 23px; z-index: 1;
+  background: rgba(16,24,43,.96);
+  border: 1px solid var(--border); border-radius: 18px;
+  box-shadow: 0 25px 65px rgba(0,0,0,.3);
+  transform: rotate(-4deg);
+}
+.dots { display: flex; gap: 6px; margin-bottom: 20px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+.dots i:nth-child(2) { background: var(--cyan); }
+.dots i:nth-child(3) { background: #ff8b9b; }
+.code-line { font: 12px/2 monospace; color: #9eacd0; }
+.code-line b { color: var(--cyan); font-weight: 500; }
+.code-line span { color: #d8a9ff; }
+.floating {
+  position: absolute; padding: 10px 15px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; font-size: 12px; font-weight: 700;
+}
+.float-one { top: 12%; right: 0; }
+.float-two { bottom: 12%; left: 0; }
+section { padding: 85px 0; }
+.section-head { margin-bottom: 34px; }
+.section-head h2 { font-size: clamp(29px, 4vw, 42px); letter-spacing: -1px; }
+.section-head p { color: var(--muted); margin-top: 8px; }
+.about-grid, .contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+}
+.panel {
+  padding: 27px; background: var(--panel);
+  border: 1px solid var(--border); border-radius: 17px;
+}
+.panel h3 { margin-bottom: 12px; }
+.panel p { color: var(--muted); font-size: 14px; }
+.tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+.tag {
+  padding: 7px 12px; font-size: 12px;
+  border: 1px solid var(--border); border-radius: 8px;
+  color: var(--cyan); background: rgba(99,242,228,.04);
+}
+.skills-grid, .projects-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px;
+}
+.skill, .project {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 16px; padding: 23px; transition: .25s;
+}
+.skill:hover, .project:hover {
+  transform: translateY(-5px); border-color: rgba(99,242,228,.5);
+}
+.skill-icon { font-size: 27px; margin-bottom: 12px; }
+.skill p, .project p { color: var(--muted); font-size: 13px; margin-top: 8px; }
+.project-top {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 17px; gap: 10px;
+}
+.project-symbol { font-size: 27px; }
+.project-type { font-size: 10px; color: var(--cyan); letter-spacing: 1px; }
+.project .tags { margin-top: 15px; }
+.project .tag { font-size: 10px; }
+.contact-card {
+  padding: 30px; background: var(--panel);
+  border: 1px solid var(--border); border-radius: 17px;
+}
+.contact-card p { color: var(--muted); margin: 8px 0 20px; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.contact-links a { font-size: 13px; color: var(--cyan); }
+.contact-links a:hover { text-decoration: underline; }
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0; text-align: center;
+  color: var(--muted); font-size: 12px;
+}
+.reveal { opacity: 0; transform: translateY(18px); transition: .65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.top-btn {
+  position: fixed; right: 18px; bottom: 18px;
+  width: 42px; height: 42px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--panel);
+  color: var(--cyan); display: none; z-index: 50;
+}
+.top-btn.show { display: block; }
+
+@media (max-width: 760px) {
+  .nav { min-height: 65px; }
+  .menu-btn { display: block; }
+  .nav-links {
+    display: none; position: absolute; top: 65px;
+    left: 0; right: 0; padding: 22px 5%;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    flex-direction: column; align-items: stretch; gap: 17px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 5px 0; }
+  .hero { min-height: auto; grid-template-columns: 1fr; padding: 70px 0 45px; gap: 25px; }
+  h1 { letter-spacing: -2px; }
+  .hero-art { min-height: 300px; }
+  .float-one { right: 1%; }
+  .float-two { left: 1%; }
+  section { padding: 62px 0; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .skills-grid, .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel, .skill, .project { padding: 18px; }
+}
+@media (max-width: 430px) {
+  .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+  .hero-art { min-height: 260px; }
+  .orbit { width: 250px; }
+  .code-card { width: 76%; padding: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
-  <div class="ornament">❋ ॐ ❋</div>
-  <h1 id="heroTitle">Navadurga</h1>
-  <p id="heroText">Nine Divine Forms of Maa Durga · A devotional guide to their stories, sacred symbols, mantras and spiritual significance.</p>
-  <div class="ornament">✦ जय माता दी ✦</div>
+  <div class="container nav">
+    <a class="logo" href="#home">RK<span>.</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false"
+      aria-controls="navLinks" aria-label="Toggle navigation">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
-<div class="controls">
-  <label for="language" id="languageLabel">Choose Language</label>
-  <select id="language" aria-label="Choose language">
-    <option value="en">English</option>
-    <option value="hi">हिन्दी</option>
-  </select>
-  <input id="search" type="search" placeholder="Search an avatar..." aria-label="Search avatars">
-  <button class="secondary" id="allBtn">All 9 Avatars</button>
-</div>
-
 <main>
-  <h2 class="section-title" id="listTitle">Explore the Nine Forms</h2>
-  <div class="grid" id="grid"></div>
+  <div class="container hero" id="home">
+    <div class="hero-copy">
+      <div class="eyebrow">Welcome to my digital space</div>
+      <h1>Hi, I'm<br><span class="gradient">Rajnish Kumar.</span></h1>
+      <h3>Computer Science Graduate & Aspiring Developer</h3>
+      <p style="margin-top:15px">
+        I enjoy turning creative ideas into useful digital experiences.
+        Explore my skills, projects and journey into technology.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#projects">Explore my work ↗</a>
+        <a class="btn btn-secondary" href="#contact">Let's connect</a>
+      </div>
+    </div>
 
-  <article id="details">
-    <div class="actions">
-      <button class="secondary" id="backBtn">← Back to all avatars</button>
+    <div class="hero-art" aria-label="Decorative coding illustration">
+      <div class="orbit">
+        <div class="code-card">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="code-line"><b>const</b> developer = {</div>
+          <div class="code-line">&nbsp; name: <span>'Rajnish'</span>,</div>
+          <div class="code-line">&nbsp; passion: <span>'Creating'</span>,</div>
+          <div class="code-line">&nbsp; learning: <b>true</b></div>
+          <div class="code-line">};</div>
+          <div class="code-line" style="color:var(--cyan)">// Building what's next.</div>
+        </div>
+      </div>
+      <div class="floating float-one">✦ Creative thinking</div>
+      <div class="floating float-two">⌘ Code · Learn · Build</div>
     </div>
-    <div id="detailContent"></div>
-    <div class="actions">
-      <button class="primary" id="prevBtn">← Previous</button>
-      <button class="secondary" id="printBtn">Print / Save PDF</button>
-      <button class="primary" id="nextBtn">Next →</button>
+  </div>
+
+  <section id="about">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="eyebrow">A little about me</div>
+        <h2>Curious mind. <span class="gradient">Builder's heart.</span></h2>
+        <p>Every project is an opportunity to learn something new.</p>
+      </div>
+      <div class="about-grid">
+        <div class="panel">
+          <h3>My journey</h3>
+          <p>
+            I'm a Computer Science Engineering graduate who is building
+            practical skills through web development and personal projects.
+            I believe in learning by doing and improving with every project.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>What drives me</h3>
+          <p>
+            Creative problem-solving, clean interfaces and technology
+            that makes everyday tasks easier. I'm looking forward to
+            growing through real-world projects and collaboration.
+          </p>
+          <div class="tags">
+            <span class="tag">Problem solving</span>
+            <span class="tag">Creativity</span>
+            <span class="tag">Continuous learning</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </article>
+  </section>
+
+  <section id="skills">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="eyebrow">My toolkit</div>
+        <h2>Skills & <span class="gradient">technologies.</span></h2>
+        <p>Replace these with the technologies you know confidently.</p>
+      </div>
+      <div class="skills-grid">
+        <article class="skill">
+          <div class="skill-icon">🌐</div>
+          <h3>HTML</h3>
+          <p>Semantic structure and accessible web pages.</p>
+        </article>
+        <article class="skill">
+          <div class="skill-icon">🎨</div>
+          <h3>CSS</h3>
+          <p>Responsive layouts, styling and animations.</p>
+        </article>
+        <article class="skill">
+          <div class="skill-icon">⚡</div>
+          <h3>JavaScript</h3>
+          <p>Interactive interfaces and browser functionality.</p>
+        </article>
+        <article class="skill">
+          <div class="skill-icon">📱</div>
+          <h3>Responsive Design</h3>
+          <p>Experiences that adapt to mobile and desktop.</p>
+        </article>
+        <article class="skill">
+          <div class="skill-icon">🧩</div>
+          <h3>Problem Solving</h3>
+          <p>Breaking tasks into manageable steps.</p>
+        </article>
+        <article class="skill">
+          <div class="skill-icon">📈</div>
+          <h3>Learning & Growth</h3>
+          <p>Exploring tools and strengthening technical skills.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="eyebrow">Selected work</div>
+        <h2>Things I've <span class="gradient">been building.</span></h2>
+        <p>Example project cards based on your work. Add links to your actual projects.</p>
+      </div>
+      <div class="projects-grid">
+        <article class="project">
+          <div class="project-top">
+            <span class="project-symbol">🪴</span>
+            <span class="project-type">WEB DEVELOPMENT</span>
+          </div>
+          <h3>K2 Hariyali</h3>
+          <p>A plant business website concept for browsing plants, gardening services and contacting the seller.</p>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <a class="contact-links" style="display:inline-flex;margin-top:20px"
+             href="#contact">Ask me about this project ↗</a>
+        </article>
+
+        <article class="project">
+          <div class="project-top">
+            <span class="project-symbol">🎂</span>
+            <span class="project-type">CREATIVE WEB</span>
+          </div>
+          <h3>Birthday Experience</h3>
+          <p>A personal celebration website concept with memories, heartfelt messages and interactive elements.</p>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <a class="contact-links" style="display:inline-flex;margin-top:20px"
+             href="#contact">Ask me about this project ↗</a>
+        </article>
+
+        <article class="project">
+          <div class="project-top">
+            <span class="project-symbol">🧮</span>
+            <span class="project-type">UI & LOGIC</span>
+          </div>
+          <h3>Calculator Interface</h3>
+          <p>A calculator app concept focused on a clear mobile interface and interactive controls.</p>
+          <div class="tags">
+            <span class="tag">JavaScript</span><span class="tag">CSS</span>
+            <span class="tag">UI Design</span>
+          </div>
+          <a class="contact-links" style="display:inline-flex;margin-top:20px"
+             href="#contact">Ask me about this project ↗</a>
+        </article>
+      </div>
+      <p style="color:var(--muted);font-size:12px;margin-top:20px">
+        Note: These are portfolio descriptions, not live project links.
+        Keep only work you can demonstrate and explain.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="eyebrow">Let's talk</div>
+        <h2>Have an idea? <span class="gradient">Let's connect.</span></h2>
+        <p>Interested in opportunities, collaboration or sharing ideas?</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Let's build something meaningful.</h3>
+          <p>
+            I'm open to connecting with developers, exploring opportunities
+            and learning from new challenges.
+          </p>
+          <div class="actions">
+            <!-- Replace with your real email -->
+            <a class="btn btn-primary" href="mailto:YOUR_EMAIL@example.com">
+              Send me an email ↗
+            </a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h3>Find me online</h3>
+          <p>Replace the placeholder links with your real profiles.</p>
+          <div class="contact-links">
+            <a href="https://github.com/" target="_blank"
+               rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/" target="_blank"
+               rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://www.instagram.com/" target="_blank"
+               rel="noopener noreferrer">Instagram ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <div style="font-size:25px;color:#f5c86a">॥ जय माता दी ॥</div>
-  <p id="footerText">May Maa Durga bless every home with courage, wisdom, peace and prosperity.</p>
-  <span>ॐ दुं दुर्गायै नमः</span>
+  <div class="container">
+    <p>Designed & built with curiosity by <strong>Rajnish Kumar</strong></p>
+    <p>© <span id="year"></span> · All rights reserved.</p>
+  </div>
 </footer>
 
+<button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
+
 <script>
-const deities = [
-{
- name:"Shailputri", hi:"माँ शैलपुत्री", day:1, symbol:"🏔️",
- meaning:"Daughter of the Mountain",
- mantra:"ॐ देवी शैलपुत्र्यै नमः।",
- mount:"Bull (Nandi)", weapons:"Trident and lotus",
- intro:"Maa Shailputri represents a strong beginning, purity and a deep connection with nature.",
- story:"According to Hindu tradition, Shailputri is the daughter of Himavan, the personification of the Himalayas. She is associated with Goddess Parvati and is worshipped as the first form of Navadurga. Her story recalls the divine power taking birth in the mountains and beginning a journey of devotion.",
- form:"She is commonly depicted riding a white bull, holding a trident in one hand and a lotus in the other. The crescent moon is traditionally associated with her crown.",
- significance:"Her form represents stability, courage, purity and the strength to begin a meaningful journey. Devotees pray for a firm mind and a peaceful life.",
- worship:"Worshipped on the first day of Navratri. Devotees offer flowers, perform aarti and pray with sincerity. Practices and offerings may differ among families and regions.",
- en:"Maa Shailputri teaches us to remain grounded, courageous and faithful even when beginning something difficult.",
- nameHi:"माँ शैलपुत्री",
- meaningHi:"पर्वतराज हिमालय की पुत्री",
- mountHi:"वृषभ (नंदी)",
- weaponsHi:"त्रिशूल और कमल",
- introHi:"माँ शैलपुत्री दृढ़ता, पवित्रता और प्रकृति से जुड़ाव का प्रतीक हैं।",
- storyHi:"हिंदू परंपरा के अनुसार, माँ शैलपुत्री पर्वतराज हिमालय की पुत्री हैं। उन्हें माँ पार्वती का स्वरूप माना जाता है और वे नवदुर्गा का पहला रूप हैं। उनकी कथा दिव्य शक्ति के पर्वतों में जन्म लेने और भक्ति की यात्रा आरंभ करने का स्मरण कराती है।",
- formHi:"माँ को सामान्यतः सफेद वृषभ पर विराजमान दिखाया जाता है। उनके एक हाथ में त्रिशूल और दूसरे में कमल होता है। उनके मुकुट पर अर्धचंद्र का वर्णन भी मिलता है।",
- significanceHi:"उनका स्वरूप स्थिरता, साहस, पवित्रता और नए कार्य की शुरुआत करने की शक्ति का प्रतीक है। भक्त दृढ़ मन और शांतिपूर्ण जीवन के लिए प्रार्थना करते हैं।",
- worshipHi:"नवरात्रि के पहले दिन इनकी पूजा की जाती है। भक्त फूल अर्पित करते हैं, आरती करते हैं और श्रद्धा से प्रार्थना करते हैं। पूजा की परंपराएँ परिवार और क्षेत्र के अनुसार अलग हो सकती हैं।",
- enHi:"माँ शैलपुत्री हमें सिखाती हैं कि कठिन शुरुआत में भी अपने विश्वास, साहस और धैर्य को बनाए रखना चाहिए।"
-},
-{
- name:"Brahmacharini",hi:"माँ ब्रह्मचारिणी",day:2,symbol:"📿",
- meaning:"Goddess of Devotion and Penance",mantra:"ॐ देवी ब्रह्मचारिण्यै नमः।",
- mount:"Traditionally depicted walking; no animal mount",weapons:"Rosary and water pot",
- intro:"Maa Brahmacharini represents devotion, discipline, patience and spiritual determination.",
- story:"In this form, Goddess Parvati is remembered for her deep penance and unwavering devotion to Lord Shiva. Her story teaches that sincere effort and self-discipline help a person remain committed to a worthy goal.",
- form:"She is generally shown in simple white garments, holding a rosary in one hand and a kamandalu, or water pot, in the other.",
- significance:"Her qualities include patience, self-control, dedication and inner strength. She reminds devotees that meaningful achievements often require perseverance.",
- worship:"Worshipped on the second day of Navratri. Devotees offer prayers and seek strength to follow the right path with sincerity.",
- en:"Her message is to remain patient, disciplined and devoted to your responsibilities.",
- nameHi:"माँ ब्रह्मचारिणी",meaningHi:"तपस्या और ब्रह्मचर्य का पालन करने वाली देवी",
- mountHi:"परंपरागत रूप से पैदल चलती हुई दर्शाई जाती हैं; कोई पशु वाहन नहीं",
- weaponsHi:"जपमाला और कमंडल",
- introHi:"माँ ब्रह्मचारिणी भक्ति, अनुशासन, धैर्य और आध्यात्मिक दृढ़ता का प्रतीक हैं।",
- storyHi:"इस स्वरूप में माँ पार्वती को भगवान शिव को प्राप्त करने के लिए कठोर तपस्या और अटूट भक्ति करते हुए स्मरण किया जाता है। उनकी कथा सिखाती है कि सच्चा प्रयास और आत्म-अनुशासन हमें अपने लक्ष्य के प्रति समर्पित रखते हैं।",
- formHi:"उन्हें सामान्यतः साधारण सफेद वस्त्रों में दिखाया जाता है। उनके एक हाथ में जपमाला और दूसरे हाथ में कमंडल होता है।",
- significanceHi:"उनके गुण धैर्य, संयम, समर्पण और आंतरिक शक्ति हैं। वे याद दिलाती हैं कि महत्वपूर्ण उपलब्धियों के लिए निरंतर प्रयास आवश्यक है।",
- worshipHi:"नवरात्रि के दूसरे दिन इनकी पूजा होती है। भक्त सही मार्ग पर चलने और अपने कर्तव्यों को निष्ठा से निभाने की शक्ति माँगते हैं।",
- enHi:"उनका संदेश है कि धैर्य रखें, अनुशासित रहें और अपने कर्तव्यों के प्रति समर्पित रहें।"
-},
-{
- name:"Chandraghanta",hi:"माँ चंद्रघंटा",day:3,symbol:"🔔",
- meaning:"The Goddess with the Crescent Bell",mantra:"ॐ देवी चन्द्रघण्टायै नमः।",
- mount:"Lion or tiger in common depictions",weapons:"Various weapons and a hand in blessing",
- intro:"Maa Chandraghanta represents courage, alertness and the protection of devotees.",
- story:"After her marriage to Lord Shiva, Goddess Parvati is worshipped in this form with a crescent-shaped bell on her forehead. Her fierce yet compassionate appearance symbolizes readiness to oppose injustice and protect the innocent.",
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+const topBtn = document.getElementById("topBtn");
+
+menuBtn.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(isOpen));
+  menuBtn.textContent = isOpen ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.textContent = "☰";
+  });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add("visible"));
+}
+
+function updateTopButton() {
+  topBtn.classList.toggle("show", window.scrollY > 350);
+}
+window.addEventListener("scroll", updateTopButton, { passive: true });
+updateTopButton();
+
+topBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+</body>
+</html>
+ this form with a crescent-shaped bell on her forehead. Her fierce yet compassionate appearance symbolizes readiness to oppose injustice and protect the innocent.",
  form:"She is often depicted with a golden glow, a crescent shaped like a bell, several arms and a lion or tiger.",
  significance:"She unites bravery with compassion. Her form reminds devotees that strength should be used to protect others and stand against wrongdoing.",
  worship:"Worshipped on the third day of Navratri. Devotees pray for courage, peace and protection.",
