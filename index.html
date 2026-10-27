@@ -1,500 +1,918 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d1b">
-<meta name="description" content="Rajnish Kumar's personal developer portfolio.">
-<title>Rajnish Kumar | Developer Portfolio</title>
-
-<style>
-:root {
-  --bg: #080d1b;
-  --panel: #10182b;
-  --text: #f3f6ff;
-  --muted: #a0abc2;
-  --blue: #69a7ff;
-  --cyan: #63f2e4;
-  --border: rgba(255,255,255,.11);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 85px; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-a { color: inherit; text-decoration: none; }
-button { font: inherit; cursor: pointer; }
-.container { width: min(1100px, 90%); margin: auto; }
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(8,13,27,.88);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-}
-.nav {
-  min-height: 72px; display: flex;
-  align-items: center; justify-content: space-between;
-  gap: 20px;
-}
-.logo { font-size: 22px; font-weight: 850; letter-spacing: -1px; }
-.logo span { color: var(--cyan); }
-.nav-links { display: flex; align-items: center; gap: 24px; }
-.nav-links a { color: var(--muted); font-size: 14px; transition: .2s; }
-.nav-links a:hover { color: var(--cyan); }
-.menu-btn {
-  display: none; border: 1px solid var(--border);
-  color: var(--text); background: var(--panel);
-  padding: 6px 12px; border-radius: 9px;
-}
-.hero {
-  min-height: 83vh; display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  align-items: center; gap: 55px; padding: 80px 0;
-}
-.eyebrow {
-  color: var(--cyan); font-size: 12px;
-  letter-spacing: 3px; font-weight: 800;
-  text-transform: uppercase;
-}
-h1 {
-  font-size: clamp(42px, 7vw, 76px);
-  line-height: 1.08; letter-spacing: -3px;
-  margin: 20px 0;
-}
-.gradient {
-  background: linear-gradient(100deg, var(--blue), var(--cyan));
-  color: transparent; background-clip: text;
-}
-.hero p, .section-intro { color: var(--muted); max-width: 570px; }
-.actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
-.btn {
-  display: inline-flex; justify-content: center; align-items: center;
-  padding: 12px 20px; border-radius: 10px;
-  font-weight: 750; font-size: 14px; transition: .25s;
-}
-.btn-primary { background: var(--cyan); color: #07131b; }
-.btn-secondary { border: 1px solid var(--border); background: var(--panel); }
-.btn:hover { transform: translateY(-3px); }
-.hero-art {
-  min-height: 330px; display: grid; place-items: center;
-  position: relative;
-}
-.orbit {
-  width: min(300px, 75vw); aspect-ratio: 1;
-  border-radius: 50%; border: 1px solid rgba(99,242,228,.28);
-  display: grid; place-items: center; position: relative;
-  box-shadow: 0 0 80px rgba(105,167,255,.08);
-}
-.orbit::before, .orbit::after {
-  content: ""; position: absolute; border-radius: 50%;
-  border: 1px dashed rgba(105,167,255,.4);
-}
-.orbit::before { inset: 22px; }
-.orbit::after { inset: 45px; }
-.code-card {
-  width: 72%; padding: 23px; z-index: 1;
-  background: rgba(16,24,43,.96);
-  border: 1px solid var(--border); border-radius: 18px;
-  box-shadow: 0 25px 65px rgba(0,0,0,.3);
-  transform: rotate(-4deg);
-}
-.dots { display: flex; gap: 6px; margin-bottom: 20px; }
-.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
-.dots i:nth-child(2) { background: var(--cyan); }
-.dots i:nth-child(3) { background: #ff8b9b; }
-.code-line { font: 12px/2 monospace; color: #9eacd0; }
-.code-line b { color: var(--cyan); font-weight: 500; }
-.code-line span { color: #d8a9ff; }
-.floating {
-  position: absolute; padding: 10px 15px;
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 12px; font-size: 12px; font-weight: 700;
-}
-.float-one { top: 12%; right: 0; }
-.float-two { bottom: 12%; left: 0; }
-section { padding: 85px 0; }
-.section-head { margin-bottom: 34px; }
-.section-head h2 { font-size: clamp(29px, 4vw, 42px); letter-spacing: -1px; }
-.section-head p { color: var(--muted); margin-top: 8px; }
-.about-grid, .contact-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
-}
-.panel {
-  padding: 27px; background: var(--panel);
-  border: 1px solid var(--border); border-radius: 17px;
-}
-.panel h3 { margin-bottom: 12px; }
-.panel p { color: var(--muted); font-size: 14px; }
-.tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
-.tag {
-  padding: 7px 12px; font-size: 12px;
-  border: 1px solid var(--border); border-radius: 8px;
-  color: var(--cyan); background: rgba(99,242,228,.04);
-}
-.skills-grid, .projects-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px;
-}
-.skill, .project {
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 16px; padding: 23px; transition: .25s;
-}
-.skill:hover, .project:hover {
-  transform: translateY(-5px); border-color: rgba(99,242,228,.5);
-}
-.skill-icon { font-size: 27px; margin-bottom: 12px; }
-.skill p, .project p { color: var(--muted); font-size: 13px; margin-top: 8px; }
-.project-top {
-  display: flex; justify-content: space-between;
-  align-items: center; margin-bottom: 17px; gap: 10px;
-}
-.project-symbol { font-size: 27px; }
-.project-type { font-size: 10px; color: var(--cyan); letter-spacing: 1px; }
-.project .tags { margin-top: 15px; }
-.project .tag { font-size: 10px; }
-.contact-card {
-  padding: 30px; background: var(--panel);
-  border: 1px solid var(--border); border-radius: 17px;
-}
-.contact-card p { color: var(--muted); margin: 8px 0 20px; }
-.contact-links { display: flex; flex-wrap: wrap; gap: 10px; }
-.contact-links a { font-size: 13px; color: var(--cyan); }
-.contact-links a:hover { text-decoration: underline; }
-footer {
-  border-top: 1px solid var(--border);
-  padding: 24px 0; text-align: center;
-  color: var(--muted); font-size: 12px;
-}
-.reveal { opacity: 0; transform: translateY(18px); transition: .65s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.top-btn {
-  position: fixed; right: 18px; bottom: 18px;
-  width: 42px; height: 42px; border-radius: 12px;
-  border: 1px solid var(--border); background: var(--panel);
-  color: var(--cyan); display: none; z-index: 50;
-}
-.top-btn.show { display: block; }
-
-@media (max-width: 760px) {
-  .nav { min-height: 65px; }
-  .menu-btn { display: block; }
-  .nav-links {
-    display: none; position: absolute; top: 65px;
-    left: 0; right: 0; padding: 22px 5%;
-    background: var(--bg); border-bottom: 1px solid var(--border);
-    flex-direction: column; align-items: stretch; gap: 17px;
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a { padding: 5px 0; }
-  .hero { min-height: auto; grid-template-columns: 1fr; padding: 70px 0 45px; gap: 25px; }
-  h1 { letter-spacing: -2px; }
-  .hero-art { min-height: 300px; }
-  .float-one { right: 1%; }
-  .float-two { left: 1%; }
-  section { padding: 62px 0; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; }
-  .skills-grid, .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .panel, .skill, .project { padding: 18px; }
-}
-@media (max-width: 430px) {
-  .skills-grid, .projects-grid { grid-template-columns: 1fr; }
-  .hero-art { min-height: 260px; }
-  .orbit { width: 250px; }
-  .code-card { width: 76%; padding: 17px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
-  }
-  .reveal { opacity: 1; transform: none; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMaster Pro - Professional Typing Speed Test & Analytics</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Performance Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100, 116, 139, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 116, 139, 0.5);
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .animate-blink {
+            animation: blink 1s infinite;
+        }
+        .glass-panel {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+    </style>
 </head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
 
-<body>
-<header>
-  <div class="container nav">
-    <a class="logo" href="#home">RK<span>.</span></a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false"
-      aria-controls="navLinks" aria-label="Toggle navigation">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+    <!-- Top Header -->
+    <header class="w-full border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 glass-panel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('test')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 text-white font-bold text-xl">
+                    <i class="fa-solid fa-keyboard"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl tracking-tight bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">TypeMaster Pro</h1>
+                    <p class="text-xs text-slate-400 font-medium">Advanced Typing Speed & Skill Analytics</p>
+                </div>
+            </div>
 
-<main>
-  <div class="container hero" id="home">
-    <div class="hero-copy">
-      <div class="eyebrow">Welcome to my digital space</div>
-      <h1>Hi, I'm<br><span class="gradient">Rajnish Kumar.</span></h1>
-      <h3>Computer Science Graduate & Aspiring Developer</h3>
-      <p style="margin-top:15px">
-        I enjoy turning creative ideas into useful digital experiences.
-        Explore my skills, projects and journey into technology.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#projects">Explore my work ↗</a>
-        <a class="btn btn-secondary" href="#contact">Let's connect</a>
-      </div>
-    </div>
+            <!-- Navigation Tabs -->
+            <nav class="hidden md:flex items-center space-x-1 bg-slate-800/60 p-1.5 rounded-xl border border-slate-700/50">
+                <button onclick="switchTab('test')" id="nav-test" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-sm flex items-center space-x-2">
+                    <i class="fa-solid fa-bolt text-xs"></i><span>Typing Test</span>
+                </button>
+                <button onclick="switchTab('stats')" id="nav-stats" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2">
+                    <i class="fa-solid fa-chart-line text-xs"></i><span>Statistics & History</span>
+                </button>
+                <button onclick="switchTab('practice')" id="nav-practice" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2">
+                    <i class="fa-solid fa-dumbbell text-xs"></i><span>Skill Trainer</span>
+                </button>
+            </nav>
 
-    <div class="hero-art" aria-label="Decorative coding illustration">
-      <div class="orbit">
-        <div class="code-card">
-          <div class="dots"><i></i><i></i><i></i></div>
-          <div class="code-line"><b>const</b> developer = {</div>
-          <div class="code-line">&nbsp; name: <span>'Rajnish'</span>,</div>
-          <div class="code-line">&nbsp; passion: <span>'Creating'</span>,</div>
-          <div class="code-line">&nbsp; learning: <b>true</b></div>
-          <div class="code-line">};</div>
-          <div class="code-line" style="color:var(--cyan)">// Building what's next.</div>
+            <!-- Actions & Theme Toggle -->
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700/60 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition shadow-sm" title="Toggle Theme">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/50 text-xs text-slate-300">
+                    <i class="fa-solid fa-keyboard text-indigo-400"></i>
+                    <span>Shortcut: <kbd class="px-1.5 py-0.5 bg-slate-700 rounded text-slate-200 font-mono">Tab</kbd> + <kbd class="px-1.5 py-0.5 bg-slate-700 rounded text-slate-200 font-mono">Enter</kbd></span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="floating float-one">✦ Creative thinking</div>
-      <div class="floating float-two">⌘ Code · Learn · Build</div>
-    </div>
-  </div>
+    </header>
 
-  <section id="about">
-    <div class="container reveal">
-      <div class="section-head">
-        <div class="eyebrow">A little about me</div>
-        <h2>Curious mind. <span class="gradient">Builder's heart.</span></h2>
-        <p>Every project is an opportunity to learn something new.</p>
-      </div>
-      <div class="about-grid">
-        <div class="panel">
-          <h3>My journey</h3>
-          <p>
-            I'm a Computer Science Engineering graduate who is building
-            practical skills through web development and personal projects.
-            I believe in learning by doing and improving with every project.
-          </p>
+    <!-- Mobile Nav Bar (Bottom for small screens) -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-800 p-2 z-50 flex justify-around glass-panel">
+        <button onclick="switchTab('test')" id="mobile-nav-test" class="flex flex-col items-center py-1 px-4 text-indigo-400 font-medium text-xs">
+            <i class="fa-solid fa-bolt text-lg mb-1"></i>Test
+        </button>
+        <button onclick="switchTab('stats')" id="mobile-nav-stats" class="flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs">
+            <i class="fa-solid fa-chart-line text-lg mb-1"></i>Stats
+        </button>
+        <button onclick="switchTab('practice')" id="mobile-nav-practice" class="flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs">
+            <i class="fa-solid fa-dumbbell text-lg mb-1"></i>Trainer
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 mb-16 md:mb-6">
+
+        <!-- ================= TAB 1: TYPING TEST ================= -->
+        <div id="tab-test" class="space-y-6">
+            
+            <!-- Customization Bar -->
+            <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 backdrop-blur-md shadow-lg">
+                <!-- Mode Selector -->
+                <div class="flex items-center space-x-2 bg-slate-900/60 p-1 rounded-xl border border-slate-700/50">
+                    <button onclick="setTestMode('quotes')" id="mode-quotes" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white">Quotes</button>
+                    <button onclick="setTestMode('words')" id="mode-words" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Words</button>
+                    <button onclick="setTestMode('code')" id="mode-code" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Code Snippets</button>
+                </div>
+
+                <!-- Duration Selector -->
+                <div class="flex items-center space-x-2 bg-slate-900/60 p-1 rounded-xl border border-slate-700/50">
+                    <button onclick="setDuration(15)" id="dur-15" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">15s</button>
+                    <button onclick="setDuration(30)" id="dur-30" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">30s</button>
+                    <button onclick="setDuration(60)" id="dur-60" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white">60s</button>
+                    <button onclick="setDuration(120)" id="dur-120" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">120s</button>
+                </div>
+
+                <!-- Difficulty Filter -->
+                <div class="flex items-center space-x-2 bg-slate-900/60 p-1 rounded-xl border border-slate-700/50">
+                    <button onclick="setDifficulty('all')" id="diff-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white">All</button>
+                    <button onclick="setDifficulty('beginner')" id="diff-beginner" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Easy</button>
+                    <button onclick="setDifficulty('expert')" id="diff-expert" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Expert</button>
+                </div>
+            </div>
+
+            <!-- Live HUD / Scoreboard -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
+                    <div>
+                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Time Left</p>
+                        <h3 id="hud-timer" class="text-3xl font-bold font-mono text-indigo-400">60s</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                        <i class="fa-solid fa-stopwatch text-xl"></i>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
+                    <div>
+                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Speed (WPM)</p>
+                        <h3 id="hud-wpm" class="text-3xl font-bold font-mono text-emerald-400">0</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                        <i class="fa-solid fa-gauge-high text-xl"></i>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
+                    <div>
+                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Accuracy</p>
+                        <h3 id="hud-acc" class="text-3xl font-bold font-mono text-cyan-400">100%</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                        <i class="fa-solid fa-bullseye text-xl"></i>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
+                    <div>
+                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Errors</p>
+                        <h3 id="hud-errors" class="text-3xl font-bold font-mono text-rose-400">0</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-400">
+                        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Area Card -->
+            <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-md">
+                <!-- Focus Overlay when inactive -->
+                <div id="focus-overlay" onclick="focusInput()" class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm z-20 flex flex-col items-center justify-center cursor-pointer transition-opacity duration-300">
+                    <div class="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white text-2xl shadow-xl shadow-indigo-500/30 mb-4 animate-bounce">
+                        <i class="fa-solid fa-keyboard"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Click Here or Start Typing to Begin</h3>
+                    <p class="text-sm text-slate-400">Press any key or click to focus test area</p>
+                </div>
+
+                <!-- Text Display Container -->
+                <div id="text-display" class="font-mono text-xl sm:text-2xl leading-relaxed tracking-wide select-none min-h-[140px] max-h-[220px] overflow-hidden text-slate-300 relative">
+                    <!-- Text rendered dynamically via JS -->
+                </div>
+
+                <!-- Hidden Input to Capture Keystrokes -->
+                <input type="text" id="hidden-input" class="opacity-0 absolute top-0 left-0 h-0 w-0 z-10" autocomplete="off" autocapitalize="off" spellcheck="false">
+
+                <!-- Bottom Controls Bar -->
+                <div class="mt-8 pt-6 border-t border-slate-700/50 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3 text-xs text-slate-400">
+                        <span><i class="fa-solid fa-circle-info text-indigo-400 mr-1.5"></i>Backspace is enabled</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-rotate-right text-indigo-400 mr-1.5"></i>Reset: <kbd class="px-1.5 py-0.5 bg-slate-700 rounded text-slate-300 font-mono">Esc</kbd></span>
+                    </div>
+                    <button onclick="resetTest()" class="px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 text-sm font-semibold transition flex items-center space-x-2 shadow-sm">
+                        <i class="fa-solid fa-rotate"></i><span>Restart Test</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Modal / Post-Test Breakdown (Hidden by default) -->
+            <div id="result-modal" class="hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-8">
+                    <div id="badge-container" class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                        <!-- Badge injected via JS -->
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Test Complete!</h2>
+                    <p id="encouragement-text" class="text-slate-300 text-sm sm:text-base"></p>
+                </div>
+
+                <!-- Result Score Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+                        <p class="text-xs text-slate-400 font-semibold mb-1">Final WPM</p>
+                        <h4 id="res-wpm" class="text-3xl font-extrabold text-indigo-400 font-mono">0</h4>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+                        <p class="text-xs text-slate-400 font-semibold mb-1">Raw WPM</p>
+                        <h4 id="res-raw" class="text-3xl font-extrabold text-violet-400 font-mono">0</h4>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+                        <p class="text-xs text-slate-400 font-semibold mb-1">Accuracy</p>
+                        <h4 id="res-acc" class="text-3xl font-extrabold text-cyan-400 font-mono">0%</h4>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+                        <p class="text-xs text-slate-400 font-semibold mb-1">Mistakes</p>
+                        <h4 id="res-err" class="text-3xl font-extrabold text-rose-400 font-mono">0</h4>
+                    </div>
+                </div>
+
+                <!-- Personalized Tips & Consistency -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-slate-900/40 border border-slate-700/50 rounded-2xl p-6 space-y-3">
+                        <h4 class="font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-lightbulb text-amber-400"></i><span>Personalized Improvement Tips</span>
+                        </h4>
+                        <ul id="tips-list" class="space-y-2 text-sm text-slate-300">
+                            <!-- Injected tips -->
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900/40 border border-slate-700/50 rounded-2xl p-6 space-y-3">
+                        <h4 class="font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-chart-pie text-indigo-400"></i><span>Performance Level Reference</span>
+                        </h4>
+                        <div class="space-y-2 text-xs text-slate-300">
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
+                                <span class="font-semibold text-rose-400">Beginner</span>
+                                <span>&lt; 30 WPM</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
+                                <span class="font-semibold text-amber-400">Intermediate</span>
+                                <span>30 - 60 WPM</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
+                                <span class="font-semibold text-emerald-400">Advanced</span>
+                                <span>60 - 90 WPM</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
+                                <span class="font-semibold text-indigo-400">Expert</span>
+                                <span>&gt; 90 WPM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-center space-x-4">
+                    <button onclick="resetTest(); hideResultModal();" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 transition flex items-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i><span>Try Again</span>
+                    </button>
+                    <button onclick="switchTab('stats')" class="px-6 py-3 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold transition flex items-center space-x-2">
+                        <i class="fa-solid fa-chart-line"></i><span>View All History</span>
+                    </button>
+                </div>
+            </div>
+
         </div>
-        <div class="panel">
-          <h3>What drives me</h3>
-          <p>
-            Creative problem-solving, clean interfaces and technology
-            that makes everyday tasks easier. I'm looking forward to
-            growing through real-world projects and collaboration.
-          </p>
-          <div class="tags">
-            <span class="tag">Problem solving</span>
-            <span class="tag">Creativity</span>
-            <span class="tag">Continuous learning</span>
-          </div>
+
+        <!-- ================= TAB 2: STATISTICS & HISTORY ================= -->
+        <div id="tab-stats" class="hidden space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 backdrop-blur-md">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-1">Performance Analytics & History</h2>
+                    <p class="text-xs text-slate-400">Review your past tests, track your WPM progression, and see your personal bests.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="clearHistory()" class="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold transition flex items-center space-x-2">
+                        <i class="fa-solid fa-trash"></i><span>Clear History</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Stat Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 shadow-sm">
+                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Personal Best (WPM)</p>
+                    <h3 id="stat-pb" class="text-4xl font-extrabold text-indigo-400 font-mono">0</h3>
+                </div>
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 shadow-sm">
+                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Average WPM</p>
+                    <h3 id="stat-avg-wpm" class="text-4xl font-extrabold text-emerald-400 font-mono">0</h3>
+                </div>
+                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 shadow-sm">
+                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Tests Completed</p>
+                    <h3 id="stat-total-tests" class="text-4xl font-extrabold text-cyan-400 font-mono">0</h3>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-md">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-chart-line text-indigo-400"></i><span>WPM & Accuracy Progression Chart</span>
+                </h3>
+                <div class="h-80 w-full">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-md overflow-hidden">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-clock-rotate-left text-indigo-400"></i><span>Recent Test History</span>
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-slate-900/60 text-xs uppercase text-slate-400 border-b border-slate-700">
+                            <tr>
+                                <th class="py-3 px-4 rounded-l-xl">Date</th>
+                                <th class="py-3 px-4">Mode</th>
+                                <th class="py-3 px-4">WPM</th>
+                                <th class="py-3 px-4">Raw WPM</th>
+                                <th class="py-3 px-4">Accuracy</th>
+                                <th class="py-3 px-4">Errors</th>
+                                <th class="py-3 px-4 rounded-r-xl">Level</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body" class="divide-y divide-slate-700/50">
+                            <!-- Injected rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="skills">
-    <div class="container reveal">
-      <div class="section-head">
-        <div class="eyebrow">My toolkit</div>
-        <h2>Skills & <span class="gradient">technologies.</span></h2>
-        <p>Replace these with the technologies you know confidently.</p>
-      </div>
-      <div class="skills-grid">
-        <article class="skill">
-          <div class="skill-icon">🌐</div>
-          <h3>HTML</h3>
-          <p>Semantic structure and accessible web pages.</p>
-        </article>
-        <article class="skill">
-          <div class="skill-icon">🎨</div>
-          <h3>CSS</h3>
-          <p>Responsive layouts, styling and animations.</p>
-        </article>
-        <article class="skill">
-          <div class="skill-icon">⚡</div>
-          <h3>JavaScript</h3>
-          <p>Interactive interfaces and browser functionality.</p>
-        </article>
-        <article class="skill">
-          <div class="skill-icon">📱</div>
-          <h3>Responsive Design</h3>
-          <p>Experiences that adapt to mobile and desktop.</p>
-        </article>
-        <article class="skill">
-          <div class="skill-icon">🧩</div>
-          <h3>Problem Solving</h3>
-          <p>Breaking tasks into manageable steps.</p>
-        </article>
-        <article class="skill">
-          <div class="skill-icon">📈</div>
-          <h3>Learning & Growth</h3>
-          <p>Exploring tools and strengthening technical skills.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+        <!-- ================= TAB 3: PRACTICE & SKILL TRAINER ================= -->
+        <div id="tab-practice" class="hidden space-y-6">
+            <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 backdrop-blur-md">
+                <h2 class="text-2xl font-bold text-white mb-1">Targeted Skill Trainer</h2>
+                <p class="text-xs text-slate-400">Drill down on common typing weaknesses, tricky key combinations, and special symbols to boost proficiency.</p>
+            </div>
 
-  <section id="projects">
-    <div class="container reveal">
-      <div class="section-head">
-        <div class="eyebrow">Selected work</div>
-        <h2>Things I've <span class="gradient">been building.</span></h2>
-        <p>Example project cards based on your work. Add links to your actual projects.</p>
-      </div>
-      <div class="projects-grid">
-        <article class="project">
-          <div class="project-top">
-            <span class="project-symbol">🪴</span>
-            <span class="project-type">WEB DEVELOPMENT</span>
-          </div>
-          <h3>K2 Hariyali</h3>
-          <p>A plant business website concept for browsing plants, gardening services and contacting the seller.</p>
-          <div class="tags">
-            <span class="tag">HTML</span><span class="tag">CSS</span>
-            <span class="tag">JavaScript</span>
-          </div>
-          <a class="contact-links" style="display:inline-flex;margin-top:20px"
-             href="#contact">Ask me about this project ↗</a>
-        </article>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Drill Card 1 -->
+                <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-xl mb-4">
+                            <i class="fa-solid fa-hands"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white mb-2">Home Row Mastery</h3>
+                        <p class="text-sm text-slate-400 mb-6">Focus on ASDF and JKL; keys to build fundamental finger dexterity and touch typing rhythm.</p>
+                    </div>
+                    <button onclick="startDrill('home-row')" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition shadow-md shadow-indigo-600/30">
+                        Start Drill
+                    </button>
+                </div>
 
-        <article class="project">
-          <div class="project-top">
-            <span class="project-symbol">🎂</span>
-            <span class="project-type">CREATIVE WEB</span>
-          </div>
-          <h3>Birthday Experience</h3>
-          <p>A personal celebration website concept with memories, heartfelt messages and interactive elements.</p>
-          <div class="tags">
-            <span class="tag">HTML</span><span class="tag">CSS</span>
-            <span class="tag">JavaScript</span>
-          </div>
-          <a class="contact-links" style="display:inline-flex;margin-top:20px"
-             href="#contact">Ask me about this project ↗</a>
-        </article>
+                <!-- Drill Card 2 -->
+                <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-violet-500/10 flex items-center justify-center text-violet-400 text-xl mb-4">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white mb-2">Symbols & Punctuation</h3>
+                        <p class="text-sm text-slate-400 mb-6">Master tricky programming characters like { }, [ ], ;, :, and &lt;&gt; essential for modern developers.</p>
+                    </div>
+                    <button onclick="startDrill('symbols')" class="w-full py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-sm transition shadow-md shadow-violet-600/30">
+                        Start Drill
+                    </button>
+                </div>
 
-        <article class="project">
-          <div class="project-top">
-            <span class="project-symbol">🧮</span>
-            <span class="project-type">UI & LOGIC</span>
-          </div>
-          <h3>Calculator Interface</h3>
-          <p>A calculator app concept focused on a clear mobile interface and interactive controls.</p>
-          <div class="tags">
-            <span class="tag">JavaScript</span><span class="tag">CSS</span>
-            <span class="tag">UI Design</span>
-          </div>
-          <a class="contact-links" style="display:inline-flex;margin-top:20px"
-             href="#contact">Ask me about this project ↗</a>
-        </article>
-      </div>
-      <p style="color:var(--muted);font-size:12px;margin-top:20px">
-        Note: These are portfolio descriptions, not live project links.
-        Keep only work you can demonstrate and explain.
-      </p>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container reveal">
-      <div class="section-head">
-        <div class="eyebrow">Let's talk</div>
-        <h2>Have an idea? <span class="gradient">Let's connect.</span></h2>
-        <p>Interested in opportunities, collaboration or sharing ideas?</p>
-      </div>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h3>Let's build something meaningful.</h3>
-          <p>
-            I'm open to connecting with developers, exploring opportunities
-            and learning from new challenges.
-          </p>
-          <div class="actions">
-            <!-- Replace with your real email -->
-            <a class="btn btn-primary" href="mailto:rockstarrajnish4658@gmail.com">
-              Send me an email ↗
-            </a>
-          </div>
+                <!-- Drill Card 3 -->
+                <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-xl mb-4">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white mb-2">Speed Burst Challenge</h3>
+                        <p class="text-sm text-slate-400 mb-6">High-frequency English words in rapid succession to push past your current WPM ceiling.</p>
+                    </div>
+                    <button onclick="startDrill('speed-burst')" class="w-full py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-sm transition shadow-md shadow-cyan-600/30">
+                        Start Drill
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="contact-card">
-          <h3>Find me online</h3>
-          <p>Replace the placeholder links with your real profiles.</p>
-          <div class="contact-links">
-            <a href="https://github.com/" target="_blank"
-               rel="noopener noreferrer">GitHub ↗</a>
-            <a href="https://www.linkedin.com/" target="_blank"
-               rel="noopener noreferrer">LinkedIn ↗</a>
-            <a href="https://www.instagram.com/" target="_blank"
-               rel="noopener noreferrer">Instagram ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
 
-<footer>
-  <div class="container">
-    <p>Designed & built with curiosity by <strong>Rajnish Kumar</strong></p>
-    <p>© <span id="year"></span> · All rights reserved.</p>
-  </div>
-</footer>
+    </main>
 
-<button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
+    <!-- Footer -->
+    <footer class="w-full border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>TypeMaster Pro &copy; 2026 • Professional Typing Speed & Analytics Platform</p>
+    </footer>
 
-<script>
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
-const topBtn = document.getElementById("topBtn");
+    <!-- JavaScript Application Logic -->
+    <script>
+        /* ================= DATASETS ================= */
+        const quotesData = [
+            { text: "The future belongs to those who believe in the beauty of their dreams.", diff: "beginner" },
+            { text: "Success is not final; failure is not fatal: It is the courage to continue that counts.", diff: "beginner" },
+            { text: "Programs must be written for people to read, and only incidentally for machines to execute.", diff: "intermediate" },
+            { text: "In three words I can sum up everything I've learned about life: it goes on.", diff: "beginner" },
+            { text: "Simplicity is prerequisite for reliability. Good code is its own best documentation.", diff: "intermediate" },
+            { text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", diff: "expert" },
+            { text: "Optimism is an occupational hazard of programming: feedback is treatment.", diff: "intermediate" },
+            { text: "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", diff: "advanced" },
+            { text: "Make it work, make it right, make it fast. The three golden rules of software engineering.", diff: "intermediate" },
+            { text: "Talk is cheap. Show me the code.", diff: "beginner" }
+        ];
 
-menuBtn.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  menuBtn.setAttribute("aria-expanded", String(isOpen));
-  menuBtn.textContent = isOpen ? "✕" : "☰";
-});
+        const wordsData = [
+            "the", "be", "to", "of", "and", "a", "in", "that", "have", "i", "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
+            "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my", "one", "all", "would", "there", "their", "what",
+            "code", "speed", "fast", "type", "keyboard", "finger", "practice", "master", "skill", "developer", "function", "variable", "system", "render"
+        ];
 
-navLinks.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuBtn.setAttribute("aria-expanded", "false");
-    menuBtn.textContent = "☰";
-  });
-});
+        const codeSnippets = [
+            { text: "const calculateWPM = (chars, seconds) => { return Math.round((chars / 5) / (seconds / 60)); };", diff: "advanced" },
+            { text: "function debounce(fn, delay) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); }; }", diff: "expert" },
+            { text: "const appState = { currentWpm: 0, accuracy: 100, errors: 0, isRunning: false };", diff: "intermediate" },
+            { text: "document.addEventListener('keydown', (e) => { if (e.key === 'Escape') resetTest(); });", diff: "beginner" }
+        ];
 
-document.getElementById("year").textContent = new Date().getFullYear();
+        const homeRowDrills = [
+            { text: "asdf jkl; asdf jkl; sad dad fall flask salad glass jack ask flask", diff: "beginner" }
+        ];
 
-const revealItems = document.querySelectorAll(".reveal");
+        const symbolDrills = [
+            { text: "const obj = { id: 1, name: 'Test' }; if (obj.id !== null) { console.log(obj['name']); }", diff: "expert" }
+        ];
 
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
+        /* ================= STATE VARIABLES ================= */
+        let currentMode = 'quotes';
+        let testDuration = 60;
+        let difficultyFilter = 'all';
+        let timeLeft = 60;
+        let timerInterval = null;
+        let isRunning = false;
+        let testStarted = false;
 
-  revealItems.forEach(item => observer.observe(item));
-} else {
-  revealItems.forEach(item => item.classList.add("visible"));
-}
+        let activeText = "";
+        let charIndex = 0;
+        let mistakes = 0;
+        let correctChars = 0;
+        let totalTyped = 0;
+        let historyData = JSON.parse(localStorage.getItem('typemaster_history')) || [];
+        let performanceChartInstance = null;
 
-function updateTopButton() {
-  topBtn.classList.toggle("show", window.scrollY > 350);
-}
-window.addEventListener("scroll", updateTopButton, { passive: true });
-updateTopButton();
+        /* ================= DOM ELEMENTS ================= */
+        const textDisplay = document.getElementById('text-display');
+        const hiddenInput = document.getElementById('hidden-input');
+        const focusOverlay = document.getElementById('focus-overlay');
+        const hudTimer = document.getElementById('hud-timer');
+        const hudWpm = document.getElementById('hud-wpm');
+        const hudAcc = document.getElementById('hud-acc');
+        const hudErrors = document.getElementById('hud-errors');
+        const resultModal = document.getElementById('result-modal');
 
-topBtn.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-</script>
+        /* ================= INITIALIZATION ================= */
+        window.onload = function() {
+            initTestText();
+            updateStatsDashboard();
+            setupKeyboardShortcuts();
+        };
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                // Tab + Enter or Escape resets
+                if (e.key === 'Escape') {
+                    resetTest();
+                }
+            });
+        }
+
+        /* ================= TAB SWITCHING ================= */
+        function switchTab(tabName) {
+            document.getElementById('tab-test').classList.add('hidden');
+            document.getElementById('tab-stats').classList.add('hidden');
+            document.getElementById('tab-practice').classList.add('hidden');
+
+            document.getElementById('nav-test').className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2";
+            document.getElementById('nav-stats').className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2";
+            document.getElementById('nav-practice').className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2";
+
+            // Mobile nav buttons
+            document.getElementById('mobile-nav-test').className = "flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs";
+            document.getElementById('mobile-nav-stats').className = "flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs";
+            document.getElementById('mobile-nav-practice').className = "flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs";
+
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabName}`).className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-sm flex items-center space-x-2";
+            document.getElementById(`mobile-nav-${tabName}`).className = "flex flex-col items-center py-1 px-4 text-indigo-400 font-medium text-xs";
+
+            if (tabName === 'stats') {
+                renderChart();
+                renderHistoryTable();
+            }
+            if (tabName === 'test') {
+                focusInput();
+            }
+        }
+
+        /* ================= THEME TOGGLE ================= */
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = "fa-solid fa-sun text-amber-400";
+            } else {
+                html.classList.add('dark');
+                icon.className = "fa-solid fa-moon";
+            }
+        }
+
+        /* ================= TEST CONFIGURATION ================= */
+        function setTestMode(mode) {
+            currentMode = mode;
+            ['quotes', 'words', 'code'].forEach(m => {
+                const btn = document.getElementById(`mode-${m}`);
+                btn.className = m === mode ? "px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white" : "px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200";
+            });
+            resetTest();
+        }
+
+        function setDuration(dur) {
+            testDuration = dur;
+            timeLeft = dur;
+            [15, 30, 60, 120].forEach(d => {
+                const btn = document.getElementById(`dur-${d}`);
+                btn.className = d === dur ? "px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white" : "px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200";
+            });
+            hudTimer.innerText = `${timeLeft}s`;
+            resetTest();
+        }
+
+        function setDifficulty(diff) {
+            difficultyFilter = diff;
+            ['all', 'beginner', 'expert'].forEach(d => {
+                const btn = document.getElementById(`diff-${d}`);
+                btn.className = d === diff ? "px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white" : "px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200";
+            });
+            resetTest();
+        }
+
+        function startDrill(type) {
+            switchTab('test');
+            if (type === 'home-row') {
+                activeText = homeRowDrills[0].text;
+            } else if (type === 'symbols') {
+                activeText = symbolDrills[0].text;
+            } else {
+                activeText = wordsData.sort(() => 0.5 - Math.random()).slice(0, 30).join(' ');
+            }
+            renderTextDisplay();
+            resetTestStateOnly();
+        }
+
+        /* ================= TEXT GENERATION & RENDERING ================= */
+        function initTestText() {
+            let pool = [];
+            if (currentMode === 'quotes') {
+                pool = quotesData.filter(q => difficultyFilter === 'all' || q.diff === difficultyFilter);
+                if (pool.length === 0) pool = quotesData;
+                activeText = pool[Math.floor(Math.random() * pool.length)].text;
+            } else if (currentMode === 'words') {
+                let shuffled = [...wordsData].sort(() => 0.5 - Math.random());
+                activeText = shuffled.slice(0, 35).join(' ');
+            } else if (currentMode === 'code') {
+                pool = codeSnippets.filter(c => difficultyFilter === 'all' || c.diff === difficultyFilter);
+                if (pool.length === 0) pool = codeSnippets;
+                activeText = pool[Math.floor(Math.random() * pool.length)].text;
+            }
+            renderTextDisplay();
+        }
+
+        function renderTextDisplay() {
+            textDisplay.innerHTML = '';
+            for (let i = 0; i < activeText.length; i++) {
+                const span = document.createElement('span');
+                span.innerText = activeText[i];
+                span.className = i === 0 ? "border-b-2 border-indigo-400 text-slate-100 bg-slate-700/40" : "text-slate-400";
+                textDisplay.appendChild(span);
+            }
+        }
+
+        /* ================= FOCUS HANDLING ================= */
+        function focusInput() {
+            focusOverlay.style.opacity = '0';
+            setTimeout(() => { focusOverlay.style.display = 'none'; }, 300);
+            hiddenInput.focus();
+        }
+
+        hiddenInput.addEventListener('blur', () => {
+            if (isRunning) {
+                focusOverlay.style.display = 'flex';
+                setTimeout(() => { focusOverlay.style.opacity = '1'; }, 10);
+            }
+        });
+
+        /* ================= TYPING EVENT ENGINE ================= */
+        hiddenInput.addEventListener('input', (e) => {
+            if (!testStarted) {
+                startTest();
+            }
+
+            const typedVal = hiddenInput.value;
+            const currentTypedChar = typedVal[typedVal.length - 1];
+
+            if (!isRunning) return;
+
+            // Handle backspace or deletions
+            if (typedVal.length < charIndex) {
+                charIndex = typedVal.length;
+                updateCharacterStyling();
+                return;
+            }
+
+            totalTyped++;
+            if (currentTypedChar === activeText[charIndex]) {
+                correctChars++;
+                charIndex++;
+            } else {
+                mistakes++;
+                charIndex++;
+            }
+
+            updateCharacterStyling();
+            updateLiveMetrics();
+
+            // Check if test completed
+            if (charIndex >= activeText.length) {
+                endTest();
+            }
+        });
+
+        function updateCharacterStyling() {
+            const spans = textDisplay.querySelectorAll('span');
+            spans.forEach((span, idx) => {
+                span.className = "text-slate-400";
+                if (idx < charIndex) {
+                    // evaluated
+                    // check if correct or incorrect
+                    span.className = span.innerText === hiddenInput.value[idx] ? "text-emerald-400 font-medium" : "text-rose-400 bg-rose-500/20 rounded";
+                } else if (idx === charIndex) {
+                    span.className = "border-b-2 border-indigo-400 text-slate-100 bg-slate-700/40 animate-blink";
+                }
+            });
+        }
+
+        /* ================= TIMER & METRICS ================= */
+        function startTest() {
+            testStarted = true;
+            isRunning = true;
+            timeLeft = testDuration;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                hudTimer.innerText = `${timeLeft}s`;
+                updateLiveMetrics();
+                if (timeLeft <= 0) {
+                    endTest();
+                }
+            }, 1000);
+        }
+
+        function updateLiveMetrics() {
+            const timeElapsed = testDuration - timeLeft;
+            if (timeElapsed <= 0) return;
+
+            const minutes = timeElapsed / 60;
+            const wpm = Math.round((correctChars / 5) / minutes);
+            const accuracy = totalTyped > 0 ? Math.max(0, Math.round(((correctChars) / totalTyped) * 100)) : 100;
+
+            hudWpm.innerText = isNaN(wpm) ? 0 : wpm;
+            hudAcc.innerText = `${accuracy}%`;
+            hudErrors.innerText = mistakes;
+        }
+
+        function resetTestStateOnly() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            testStarted = false;
+            charIndex = 0;
+            mistakes = 0;
+            correctChars = 0;
+            totalTyped = 0;
+            hiddenInput.value = '';
+            timeLeft = testDuration;
+            hudTimer.innerText = `${timeLeft}s`;
+            hudWpm.innerText = '0';
+            hudAcc.innerText = '100%';
+            hudErrors.innerText = '0';
+            resultModal.classList.add('hidden');
+            focusOverlay.style.display = 'flex';
+            focusOverlay.style.opacity = '1';
+        }
+
+        function resetTest() {
+            resetTestStateOnly();
+            initTestText();
+        }
+
+        /* ================= TEST COMPLETION & EVALUATION ================= */
+        function endTest() {
+            clearInterval(timerInterval);
+            isRunning = false;
+
+            const timeElapsed = testDuration - timeLeft || testDuration;
+            const minutes = timeElapsed / 60;
+            const rawWpm = Math.round((totalTyped / 5) / minutes);
+            const netWpm = Math.max(0, Math.round((correctChars / 5) / minutes));
+            const accuracy = totalTyped > 0 ? Math.max(0, Math.round((correctChars / totalTyped) * 100)) : 100;
+
+            // Save record
+            const record = {
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                mode: currentMode.toUpperCase(),
+                wpm: netWpm,
+                raw: rawWpm,
+                acc: accuracy,
+                err: mistakes,
+                level: getPerformanceLevel(netWpm).title
+            };
+
+            historyData.unshift(record);
+            if (historyData.length > 20) historyData.pop();
+            localStorage.setItem('typemaster_history', JSON.stringify(historyData));
+
+            showResults(netWpm, rawWpm, accuracy, mistakes);
+            updateStatsDashboard();
+        }
+
+        function getPerformanceLevel(wpm) {
+            if (wpm < 30) {
+                return { title: "Beginner", class: "bg-rose-500/10 text-rose-400 border border-rose-500/30", encouragement: "Great start! Focus on finger placement on the home row to build muscle memory." };
+            } else if (wpm <= 60) {
+                return { title: "Intermediate", class: "bg-amber-500/10 text-amber-400 border border-amber-500/30", encouragement: "Solid performance! You have decent speed. Try eliminating hesitation between common bigrams." };
+            } else if (wpm <= 90) {
+                return { title: "Advanced", class: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30", encouragement: "Impressive typing velocity! You type faster than most professionals. Keep aiming for zero errors." };
+            } else {
+                return { title: "Expert", class: "bg-indigo-500/10 text-indigo-400 border border-indigo-500/30", encouragement: "Elite Tier! Lightning-fast reflexes and precision. You possess master-level keyboard proficiency." };
+            }
+        }
+
+        function showResults(wpm, raw, acc, err) {
+            document.getElementById('res-wpm').innerText = wpm;
+            document.getElementById('res-raw').innerText = raw;
+            document.getElementById('res-acc').innerText = `${acc}%`;
+            document.getElementById('res-err').innerText = err;
+
+            const levelInfo = getPerformanceLevel(wpm);
+            const badgeContainer = document.getElementById('badge-container');
+            badgeContainer.className = `inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-sm font-bold shadow-lg ${levelInfo.class}`;
+            badgeContainer.innerHTML = `<i class="fa-solid fa-award"></i><span>${levelInfo.title} Level</span>`;
+
+            document.getElementById('encouragement-text').innerText = levelInfo.encouragement;
+
+            // Render tips
+            const tipsList = document.getElementById('tips-list');
+            tipsList.innerHTML = '';
+            const tips = [];
+            if (acc < 92) tips.push("<li>Prioritize accuracy over raw speed; fewer corrections lead to smoother velocity.</li>");
+            if (wpm < 40) tips.push("<li>Practice touch typing without looking at your keyboard to build natural reflex pathways.</li>");
+            if (err > 4) tips.push("<li>Watch out for recurring transposition mistakes on adjacent keys.</li>");
+            if (tips.length === 0) tips.push("<li>Outstanding rhythm and cadence! Maintain this consistency across code and quote modes.</li>");
+            tips.forEach(t => tipsList.innerHTML += t);
+
+            resultModal.classList.remove('hidden');
+            resultModal.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* ================= STATISTICS & DASHBOARD ================= */
+        function updateStatsDashboard() {
+            if (historyData.length === 0) {
+                document.getElementById('stat-pb').innerText = '0';
+                document.getElementById('stat-avg-wpm').innerText = '0';
+                document.getElementById('stat-total-tests').innerText = '0';
+                return;
+            }
+
+            const pb = Math.max(...historyData.map(h => h.wpm));
+            const avgWpm = Math.round(historyData.reduce((acc, h) => acc + h.wpm, 0) / historyData.length);
+
+            document.getElementById('stat-pb').innerText = pb;
+            document.getElementById('stat-avg-wpm').innerText = avgWpm;
+            document.getElementById('stat-total-tests').innerText = historyData.length;
+        }
+
+        function clearHistory() {
+            if (confirm("Are you sure you want to clear your typing history?")) {
+                historyData = [];
+                localStorage.removeItem('typemaster_history');
+                updateStatsDashboard();
+                renderHistoryTable();
+                if (performanceChartInstance) performanceChartInstance.destroy();
+            }
+        }
+
+        function renderHistoryTable() {
+            const tbody = document.getElementById('history-table-body');
+            tbody.innerHTML = '';
+            if (historyData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-500">No test history recorded yet. Complete a test to see records!</td></tr>`;
+                return;
+            }
+
+            historyData.forEach(h => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-700/30 transition";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-medium text-white">${h.date}</td>
+                    <td class="py-3 px-4"><span class="px-2 py-1 bg-slate-700 rounded text-xs font-semibold">${h.mode}</span></td>
+                    <td class="py-3 px-4 font-mono font-bold text-indigo-400">${h.wpm} WPM</td>
+                    <td class="py-3 px-4 font-mono text-slate-400">${h.raw} WPM</td>
+                    <td class="py-3 px-4 font-mono text-cyan-400">${h.acc}%</td>
+                    <td class="py-3 px-4 font-mono text-rose-400">${h.err}</td>
+                    <td class="py-3 px-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-800 border border-slate-700 text-slate-200">${h.level}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            if (performanceChartInstance) {
+                performanceChartInstance.destroy();
+            }
+
+            const recent = [...historyData].reverse().slice(-10);
+            const labels = recent.map((r, i) => `Test ${i + 1} (${r.date})`);
+            const wpmValues = recent.map(r => r.wpm);
+            const accValues = recent.map(r => r.acc);
+
+            performanceChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels.length > 0 ? labels : ['No Data'],
+                    datasets: [
+                        {
+                            label: 'WPM',
+                            data: wpmValues.length > 0 ? wpmValues : [0],
+                            borderColor: '#818cf8',
+                            backgroundColor: 'rgba(129, 140, 248, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Accuracy (%)',
+                            data: accValues.length > 0 ? accValues : [100],
+                            borderColor: '#22d3ee',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#94a3b8', font: { family: 'Inter' } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                            ticks: { color: '#94a3b8', font: { family: 'Inter' } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                            ticks: { color: '#94a3b8', font: { family: 'Inter' } }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
