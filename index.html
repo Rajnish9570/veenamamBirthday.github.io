@@ -1,918 +1,313 @@
+
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeMaster Pro - Professional Typing Speed Test & Analytics</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js for Performance Graphs -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-        }
-        .dark ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(100, 116, 139, 0.3);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(100, 116, 139, 0.5);
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .animate-blink {
-            animation: blink 1s infinite;
-        }
-        .glass-panel {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K2 Hariyali Brain Challenge</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#eaffef,#f4fff6);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  width: 100%;
+  max-width: 430px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px #00000018;
+  text-align: center;
+}
+
+.header {
+  background: #00bf63;
+  color: white;
+  padding: 27px 15px;
+}
+
+.header h1 {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.header p {
+  font-size: 14px;
+}
+
+.content {
+  padding: 25px 22px;
+}
+
+.tag {
+  display: inline-block;
+  background: #e3ffed;
+  color: #008b45;
+  padding: 8px 15px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.gift {
+  background: #fff8e6;
+  border: 1px dashed #e8b943;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 22px;
+  color: #825c00;
+  font-weight: bold;
+}
+
+.puzzle {
+  background: #f0fff5;
+  border: 2px solid #00bf63;
+  border-radius: 17px;
+  padding: 22px 10px;
+  margin: 18px 0;
+}
+
+.puzzle h2 {
+  color: #008c49;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.sequence {
+  font-size: 27px;
+  font-weight: bold;
+  color: #222;
+  letter-spacing: 3px;
+  margin: 15px 0;
+}
+
+.puzzle p {
+  color: #555;
+  font-size: 14px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin: 15px 0 7px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+input:focus {
+  border-color: #00bf63;
+}
+
+.submit {
+  width: 100%;
+  background: #00bf63;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 22px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: #009d50;
+}
+
+.note {
+  color: #777;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 18px;
+}
+
+.footer {
+  background: #f0fff5;
+  padding: 15px;
+  color: #008c49;
+  font-weight: bold;
+  font-size: 13px;
+}
+</style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
 
-    <!-- Top Header -->
-    <header class="w-full border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 glass-panel">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('test')">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 text-white font-bold text-xl">
-                    <i class="fa-solid fa-keyboard"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-xl tracking-tight bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">TypeMaster Pro</h1>
-                    <p class="text-xs text-slate-400 font-medium">Advanced Typing Speed & Skill Analytics</p>
-                </div>
-            </div>
+<body>
 
-            <!-- Navigation Tabs -->
-            <nav class="hidden md:flex items-center space-x-1 bg-slate-800/60 p-1.5 rounded-xl border border-slate-700/50">
-                <button onclick="switchTab('test')" id="nav-test" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-sm flex items-center space-x-2">
-                    <i class="fa-solid fa-bolt text-xs"></i><span>Typing Test</span>
-                </button>
-                <button onclick="switchTab('stats')" id="nav-stats" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2">
-                    <i class="fa-solid fa-chart-line text-xs"></i><span>Statistics & History</span>
-                </button>
-                <button onclick="switchTab('practice')" id="nav-practice" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2">
-                    <i class="fa-solid fa-dumbbell text-xs"></i><span>Skill Trainer</span>
-                </button>
-            </nav>
+<div class="container">
 
-            <!-- Actions & Theme Toggle -->
-            <div class="flex items-center space-x-3">
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700/60 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition shadow-sm" title="Toggle Theme">
-                    <i id="theme-icon" class="fa-solid fa-moon"></i>
-                </button>
-                <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/50 text-xs text-slate-300">
-                    <i class="fa-solid fa-keyboard text-indigo-400"></i>
-                    <span>Shortcut: <kbd class="px-1.5 py-0.5 bg-slate-700 rounded text-slate-200 font-mono">Tab</kbd> + <kbd class="px-1.5 py-0.5 bg-slate-700 rounded text-slate-200 font-mono">Enter</kbd></span>
-                </div>
-            </div>
-        </div>
-    </header>
+  <div class="header">
+    <h1>🌿 K2 HARIYALI</h1>
+    <p>Think Green • Live Green</p>
+  </div>
 
-    <!-- Mobile Nav Bar (Bottom for small screens) -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-800 p-2 z-50 flex justify-around glass-panel">
-        <button onclick="switchTab('test')" id="mobile-nav-test" class="flex flex-col items-center py-1 px-4 text-indigo-400 font-medium text-xs">
-            <i class="fa-solid fa-bolt text-lg mb-1"></i>Test
-        </button>
-        <button onclick="switchTab('stats')" id="mobile-nav-stats" class="flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs">
-            <i class="fa-solid fa-chart-line text-lg mb-1"></i>Stats
-        </button>
-        <button onclick="switchTab('practice')" id="mobile-nav-practice" class="flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs">
-            <i class="fa-solid fa-dumbbell text-lg mb-1"></i>Trainer
-        </button>
+  <div class="content">
+
+    <div class="tag">
+      🧠 BRAIN CHALLENGE
     </div>
 
-    <!-- Main Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 mb-16 md:mb-6">
-
-        <!-- ================= TAB 1: TYPING TEST ================= -->
-        <div id="tab-test" class="space-y-6">
-            
-            <!-- Customization Bar -->
-            <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 backdrop-blur-md shadow-lg">
-                <!-- Mode Selector -->
-                <div class="flex items-center space-x-2 bg-slate-900/60 p-1 rounded-xl border border-slate-700/50">
-                    <button onclick="setTestMode('quotes')" id="mode-quotes" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white">Quotes</button>
-                    <button onclick="setTestMode('words')" id="mode-words" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Words</button>
-                    <button onclick="setTestMode('code')" id="mode-code" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Code Snippets</button>
-                </div>
-
-                <!-- Duration Selector -->
-                <div class="flex items-center space-x-2 bg-slate-900/60 p-1 rounded-xl border border-slate-700/50">
-                    <button onclick="setDuration(15)" id="dur-15" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">15s</button>
-                    <button onclick="setDuration(30)" id="dur-30" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">30s</button>
-                    <button onclick="setDuration(60)" id="dur-60" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white">60s</button>
-                    <button onclick="setDuration(120)" id="dur-120" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">120s</button>
-                </div>
-
-                <!-- Difficulty Filter -->
-                <div class="flex items-center space-x-2 bg-slate-900/60 p-1 rounded-xl border border-slate-700/50">
-                    <button onclick="setDifficulty('all')" id="diff-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white">All</button>
-                    <button onclick="setDifficulty('beginner')" id="diff-beginner" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Easy</button>
-                    <button onclick="setDifficulty('expert')" id="diff-expert" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200">Expert</button>
-                </div>
-            </div>
-
-            <!-- Live HUD / Scoreboard -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
-                    <div>
-                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Time Left</p>
-                        <h3 id="hud-timer" class="text-3xl font-bold font-mono text-indigo-400">60s</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
-                        <i class="fa-solid fa-stopwatch text-xl"></i>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
-                    <div>
-                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Speed (WPM)</p>
-                        <h3 id="hud-wpm" class="text-3xl font-bold font-mono text-emerald-400">0</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-                        <i class="fa-solid fa-gauge-high text-xl"></i>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
-                    <div>
-                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Accuracy</p>
-                        <h3 id="hud-acc" class="text-3xl font-bold font-mono text-cyan-400">100%</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400">
-                        <i class="fa-solid fa-bullseye text-xl"></i>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 flex items-center justify-between shadow-sm">
-                    <div>
-                        <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Errors</p>
-                        <h3 id="hud-errors" class="text-3xl font-bold font-mono text-rose-400">0</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-400">
-                        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Typing Area Card -->
-            <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-md">
-                <!-- Focus Overlay when inactive -->
-                <div id="focus-overlay" onclick="focusInput()" class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm z-20 flex flex-col items-center justify-center cursor-pointer transition-opacity duration-300">
-                    <div class="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white text-2xl shadow-xl shadow-indigo-500/30 mb-4 animate-bounce">
-                        <i class="fa-solid fa-keyboard"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Click Here or Start Typing to Begin</h3>
-                    <p class="text-sm text-slate-400">Press any key or click to focus test area</p>
-                </div>
-
-                <!-- Text Display Container -->
-                <div id="text-display" class="font-mono text-xl sm:text-2xl leading-relaxed tracking-wide select-none min-h-[140px] max-h-[220px] overflow-hidden text-slate-300 relative">
-                    <!-- Text rendered dynamically via JS -->
-                </div>
-
-                <!-- Hidden Input to Capture Keystrokes -->
-                <input type="text" id="hidden-input" class="opacity-0 absolute top-0 left-0 h-0 w-0 z-10" autocomplete="off" autocapitalize="off" spellcheck="false">
-
-                <!-- Bottom Controls Bar -->
-                <div class="mt-8 pt-6 border-t border-slate-700/50 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex items-center space-x-3 text-xs text-slate-400">
-                        <span><i class="fa-solid fa-circle-info text-indigo-400 mr-1.5"></i>Backspace is enabled</span>
-                        <span>•</span>
-                        <span><i class="fa-solid fa-rotate-right text-indigo-400 mr-1.5"></i>Reset: <kbd class="px-1.5 py-0.5 bg-slate-700 rounded text-slate-300 font-mono">Esc</kbd></span>
-                    </div>
-                    <button onclick="resetTest()" class="px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 text-sm font-semibold transition flex items-center space-x-2 shadow-sm">
-                        <i class="fa-solid fa-rotate"></i><span>Restart Test</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Results Modal / Post-Test Breakdown (Hidden by default) -->
-            <div id="result-modal" class="hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
-                <div class="text-center max-w-2xl mx-auto space-y-4 mb-8">
-                    <div id="badge-container" class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
-                        <!-- Badge injected via JS -->
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Test Complete!</h2>
-                    <p id="encouragement-text" class="text-slate-300 text-sm sm:text-base"></p>
-                </div>
-
-                <!-- Result Score Cards -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
-                        <p class="text-xs text-slate-400 font-semibold mb-1">Final WPM</p>
-                        <h4 id="res-wpm" class="text-3xl font-extrabold text-indigo-400 font-mono">0</h4>
-                    </div>
-                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
-                        <p class="text-xs text-slate-400 font-semibold mb-1">Raw WPM</p>
-                        <h4 id="res-raw" class="text-3xl font-extrabold text-violet-400 font-mono">0</h4>
-                    </div>
-                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
-                        <p class="text-xs text-slate-400 font-semibold mb-1">Accuracy</p>
-                        <h4 id="res-acc" class="text-3xl font-extrabold text-cyan-400 font-mono">0%</h4>
-                    </div>
-                    <div class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-4 text-center">
-                        <p class="text-xs text-slate-400 font-semibold mb-1">Mistakes</p>
-                        <h4 id="res-err" class="text-3xl font-extrabold text-rose-400 font-mono">0</h4>
-                    </div>
-                </div>
-
-                <!-- Personalized Tips & Consistency -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-slate-900/40 border border-slate-700/50 rounded-2xl p-6 space-y-3">
-                        <h4 class="font-bold text-white flex items-center space-x-2">
-                            <i class="fa-solid fa-lightbulb text-amber-400"></i><span>Personalized Improvement Tips</span>
-                        </h4>
-                        <ul id="tips-list" class="space-y-2 text-sm text-slate-300">
-                            <!-- Injected tips -->
-                        </ul>
-                    </div>
-
-                    <div class="bg-slate-900/40 border border-slate-700/50 rounded-2xl p-6 space-y-3">
-                        <h4 class="font-bold text-white flex items-center space-x-2">
-                            <i class="fa-solid fa-chart-pie text-indigo-400"></i><span>Performance Level Reference</span>
-                        </h4>
-                        <div class="space-y-2 text-xs text-slate-300">
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
-                                <span class="font-semibold text-rose-400">Beginner</span>
-                                <span>&lt; 30 WPM</span>
-                            </div>
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
-                                <span class="font-semibold text-amber-400">Intermediate</span>
-                                <span>30 - 60 WPM</span>
-                            </div>
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
-                                <span class="font-semibold text-emerald-400">Advanced</span>
-                                <span>60 - 90 WPM</span>
-                            </div>
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-slate-800/60">
-                                <span class="font-semibold text-indigo-400">Expert</span>
-                                <span>&gt; 90 WPM</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex justify-center space-x-4">
-                    <button onclick="resetTest(); hideResultModal();" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 transition flex items-center space-x-2">
-                        <i class="fa-solid fa-rotate-right"></i><span>Try Again</span>
-                    </button>
-                    <button onclick="switchTab('stats')" class="px-6 py-3 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold transition flex items-center space-x-2">
-                        <i class="fa-solid fa-chart-line"></i><span>View All History</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ================= TAB 2: STATISTICS & HISTORY ================= -->
-        <div id="tab-stats" class="hidden space-y-6">
-            <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 backdrop-blur-md">
-                <div>
-                    <h2 class="text-2xl font-bold text-white mb-1">Performance Analytics & History</h2>
-                    <p class="text-xs text-slate-400">Review your past tests, track your WPM progression, and see your personal bests.</p>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <button onclick="clearHistory()" class="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold transition flex items-center space-x-2">
-                        <i class="fa-solid fa-trash"></i><span>Clear History</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Quick Stat Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 shadow-sm">
-                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Personal Best (WPM)</p>
-                    <h3 id="stat-pb" class="text-4xl font-extrabold text-indigo-400 font-mono">0</h3>
-                </div>
-                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 shadow-sm">
-                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Average WPM</p>
-                    <h3 id="stat-avg-wpm" class="text-4xl font-extrabold text-emerald-400 font-mono">0</h3>
-                </div>
-                <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 shadow-sm">
-                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Tests Completed</p>
-                    <h3 id="stat-total-tests" class="text-4xl font-extrabold text-cyan-400 font-mono">0</h3>
-                </div>
-            </div>
-
-            <!-- Chart Section -->
-            <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-md">
-                <h3 class="text-lg font-bold text-white mb-4 flex items-center space-x-2">
-                    <i class="fa-solid fa-chart-line text-indigo-400"></i><span>WPM & Accuracy Progression Chart</span>
-                </h3>
-                <div class="h-80 w-full">
-                    <canvas id="performanceChart"></canvas>
-                </div>
-            </div>
-
-            <!-- History Table -->
-            <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-md overflow-hidden">
-                <h3 class="text-lg font-bold text-white mb-4 flex items-center space-x-2">
-                    <i class="fa-solid fa-clock-rotate-left text-indigo-400"></i><span>Recent Test History</span>
-                </h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-300">
-                        <thead class="bg-slate-900/60 text-xs uppercase text-slate-400 border-b border-slate-700">
-                            <tr>
-                                <th class="py-3 px-4 rounded-l-xl">Date</th>
-                                <th class="py-3 px-4">Mode</th>
-                                <th class="py-3 px-4">WPM</th>
-                                <th class="py-3 px-4">Raw WPM</th>
-                                <th class="py-3 px-4">Accuracy</th>
-                                <th class="py-3 px-4">Errors</th>
-                                <th class="py-3 px-4 rounded-r-xl">Level</th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-table-body" class="divide-y divide-slate-700/50">
-                            <!-- Injected rows -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= TAB 3: PRACTICE & SKILL TRAINER ================= -->
-        <div id="tab-practice" class="hidden space-y-6">
-            <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 backdrop-blur-md">
-                <h2 class="text-2xl font-bold text-white mb-1">Targeted Skill Trainer</h2>
-                <p class="text-xs text-slate-400">Drill down on common typing weaknesses, tricky key combinations, and special symbols to boost proficiency.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Drill Card 1 -->
-                <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-xl mb-4">
-                            <i class="fa-solid fa-hands"></i>
-                        </div>
-                        <h3 class="font-bold text-lg text-white mb-2">Home Row Mastery</h3>
-                        <p class="text-sm text-slate-400 mb-6">Focus on ASDF and JKL; keys to build fundamental finger dexterity and touch typing rhythm.</p>
-                    </div>
-                    <button onclick="startDrill('home-row')" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition shadow-md shadow-indigo-600/30">
-                        Start Drill
-                    </button>
-                </div>
-
-                <!-- Drill Card 2 -->
-                <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-violet-500/10 flex items-center justify-center text-violet-400 text-xl mb-4">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <h3 class="font-bold text-lg text-white mb-2">Symbols & Punctuation</h3>
-                        <p class="text-sm text-slate-400 mb-6">Master tricky programming characters like { }, [ ], ;, :, and &lt;&gt; essential for modern developers.</p>
-                    </div>
-                    <button onclick="startDrill('symbols')" class="w-full py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-sm transition shadow-md shadow-violet-600/30">
-                        Start Drill
-                    </button>
-                </div>
-
-                <!-- Drill Card 3 -->
-                <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-xl mb-4">
-                            <i class="fa-solid fa-bolt"></i>
-                        </div>
-                        <h3 class="font-bold text-lg text-white mb-2">Speed Burst Challenge</h3>
-                        <p class="text-sm text-slate-400 mb-6">High-frequency English words in rapid succession to push past your current WPM ceiling.</p>
-                    </div>
-                    <button onclick="startDrill('speed-burst')" class="w-full py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-sm transition shadow-md shadow-cyan-600/30">
-                        Start Drill
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="w-full border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-        <p>TypeMaster Pro &copy; 2026 • Professional Typing Speed & Analytics Platform</p>
-    </footer>
-
-    <!-- JavaScript Application Logic -->
-    <script>
-        /* ================= DATASETS ================= */
-        const quotesData = [
-            { text: "The future belongs to those who believe in the beauty of their dreams.", diff: "beginner" },
-            { text: "Success is not final; failure is not fatal: It is the courage to continue that counts.", diff: "beginner" },
-            { text: "Programs must be written for people to read, and only incidentally for machines to execute.", diff: "intermediate" },
-            { text: "In three words I can sum up everything I've learned about life: it goes on.", diff: "beginner" },
-            { text: "Simplicity is prerequisite for reliability. Good code is its own best documentation.", diff: "intermediate" },
-            { text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", diff: "expert" },
-            { text: "Optimism is an occupational hazard of programming: feedback is treatment.", diff: "intermediate" },
-            { text: "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", diff: "advanced" },
-            { text: "Make it work, make it right, make it fast. The three golden rules of software engineering.", diff: "intermediate" },
-            { text: "Talk is cheap. Show me the code.", diff: "beginner" }
-        ];
-
-        const wordsData = [
-            "the", "be", "to", "of", "and", "a", "in", "that", "have", "i", "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
-            "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my", "one", "all", "would", "there", "their", "what",
-            "code", "speed", "fast", "type", "keyboard", "finger", "practice", "master", "skill", "developer", "function", "variable", "system", "render"
-        ];
-
-        const codeSnippets = [
-            { text: "const calculateWPM = (chars, seconds) => { return Math.round((chars / 5) / (seconds / 60)); };", diff: "advanced" },
-            { text: "function debounce(fn, delay) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); }; }", diff: "expert" },
-            { text: "const appState = { currentWpm: 0, accuracy: 100, errors: 0, isRunning: false };", diff: "intermediate" },
-            { text: "document.addEventListener('keydown', (e) => { if (e.key === 'Escape') resetTest(); });", diff: "beginner" }
-        ];
-
-        const homeRowDrills = [
-            { text: "asdf jkl; asdf jkl; sad dad fall flask salad glass jack ask flask", diff: "beginner" }
-        ];
-
-        const symbolDrills = [
-            { text: "const obj = { id: 1, name: 'Test' }; if (obj.id !== null) { console.log(obj['name']); }", diff: "expert" }
-        ];
-
-        /* ================= STATE VARIABLES ================= */
-        let currentMode = 'quotes';
-        let testDuration = 60;
-        let difficultyFilter = 'all';
-        let timeLeft = 60;
-        let timerInterval = null;
-        let isRunning = false;
-        let testStarted = false;
-
-        let activeText = "";
-        let charIndex = 0;
-        let mistakes = 0;
-        let correctChars = 0;
-        let totalTyped = 0;
-        let historyData = JSON.parse(localStorage.getItem('typemaster_history')) || [];
-        let performanceChartInstance = null;
-
-        /* ================= DOM ELEMENTS ================= */
-        const textDisplay = document.getElementById('text-display');
-        const hiddenInput = document.getElementById('hidden-input');
-        const focusOverlay = document.getElementById('focus-overlay');
-        const hudTimer = document.getElementById('hud-timer');
-        const hudWpm = document.getElementById('hud-wpm');
-        const hudAcc = document.getElementById('hud-acc');
-        const hudErrors = document.getElementById('hud-errors');
-        const resultModal = document.getElementById('result-modal');
-
-        /* ================= INITIALIZATION ================= */
-        window.onload = function() {
-            initTestText();
-            updateStatsDashboard();
-            setupKeyboardShortcuts();
-        };
-
-        function setupKeyboardShortcuts() {
-            document.addEventListener('keydown', (e) => {
-                // Tab + Enter or Escape resets
-                if (e.key === 'Escape') {
-                    resetTest();
-                }
-            });
-        }
-
-        /* ================= TAB SWITCHING ================= */
-        function switchTab(tabName) {
-            document.getElementById('tab-test').classList.add('hidden');
-            document.getElementById('tab-stats').classList.add('hidden');
-            document.getElementById('tab-practice').classList.add('hidden');
-
-            document.getElementById('nav-test').className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2";
-            document.getElementById('nav-stats').className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2";
-            document.getElementById('nav-practice').className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 flex items-center space-x-2";
-
-            // Mobile nav buttons
-            document.getElementById('mobile-nav-test').className = "flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs";
-            document.getElementById('mobile-nav-stats').className = "flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs";
-            document.getElementById('mobile-nav-practice').className = "flex flex-col items-center py-1 px-4 text-slate-400 font-medium text-xs";
-
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-            document.getElementById(`nav-${tabName}`).className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-sm flex items-center space-x-2";
-            document.getElementById(`mobile-nav-${tabName}`).className = "flex flex-col items-center py-1 px-4 text-indigo-400 font-medium text-xs";
-
-            if (tabName === 'stats') {
-                renderChart();
-                renderHistoryTable();
-            }
-            if (tabName === 'test') {
-                focusInput();
-            }
-        }
-
-        /* ================= THEME TOGGLE ================= */
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.className = "fa-solid fa-sun text-amber-400";
-            } else {
-                html.classList.add('dark');
-                icon.className = "fa-solid fa-moon";
-            }
-        }
-
-        /* ================= TEST CONFIGURATION ================= */
-        function setTestMode(mode) {
-            currentMode = mode;
-            ['quotes', 'words', 'code'].forEach(m => {
-                const btn = document.getElementById(`mode-${m}`);
-                btn.className = m === mode ? "px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white" : "px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200";
-            });
-            resetTest();
-        }
-
-        function setDuration(dur) {
-            testDuration = dur;
-            timeLeft = dur;
-            [15, 30, 60, 120].forEach(d => {
-                const btn = document.getElementById(`dur-${d}`);
-                btn.className = d === dur ? "px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white" : "px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200";
-            });
-            hudTimer.innerText = `${timeLeft}s`;
-            resetTest();
-        }
-
-        function setDifficulty(diff) {
-            difficultyFilter = diff;
-            ['all', 'beginner', 'expert'].forEach(d => {
-                const btn = document.getElementById(`diff-${d}`);
-                btn.className = d === diff ? "px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white" : "px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-slate-200";
-            });
-            resetTest();
-        }
-
-        function startDrill(type) {
-            switchTab('test');
-            if (type === 'home-row') {
-                activeText = homeRowDrills[0].text;
-            } else if (type === 'symbols') {
-                activeText = symbolDrills[0].text;
-            } else {
-                activeText = wordsData.sort(() => 0.5 - Math.random()).slice(0, 30).join(' ');
-            }
-            renderTextDisplay();
-            resetTestStateOnly();
-        }
-
-        /* ================= TEXT GENERATION & RENDERING ================= */
-        function initTestText() {
-            let pool = [];
-            if (currentMode === 'quotes') {
-                pool = quotesData.filter(q => difficultyFilter === 'all' || q.diff === difficultyFilter);
-                if (pool.length === 0) pool = quotesData;
-                activeText = pool[Math.floor(Math.random() * pool.length)].text;
-            } else if (currentMode === 'words') {
-                let shuffled = [...wordsData].sort(() => 0.5 - Math.random());
-                activeText = shuffled.slice(0, 35).join(' ');
-            } else if (currentMode === 'code') {
-                pool = codeSnippets.filter(c => difficultyFilter === 'all' || c.diff === difficultyFilter);
-                if (pool.length === 0) pool = codeSnippets;
-                activeText = pool[Math.floor(Math.random() * pool.length)].text;
-            }
-            renderTextDisplay();
-        }
-
-        function renderTextDisplay() {
-            textDisplay.innerHTML = '';
-            for (let i = 0; i < activeText.length; i++) {
-                const span = document.createElement('span');
-                span.innerText = activeText[i];
-                span.className = i === 0 ? "border-b-2 border-indigo-400 text-slate-100 bg-slate-700/40" : "text-slate-400";
-                textDisplay.appendChild(span);
-            }
-        }
-
-        /* ================= FOCUS HANDLING ================= */
-        function focusInput() {
-            focusOverlay.style.opacity = '0';
-            setTimeout(() => { focusOverlay.style.display = 'none'; }, 300);
-            hiddenInput.focus();
-        }
-
-        hiddenInput.addEventListener('blur', () => {
-            if (isRunning) {
-                focusOverlay.style.display = 'flex';
-                setTimeout(() => { focusOverlay.style.opacity = '1'; }, 10);
-            }
-        });
-
-        /* ================= TYPING EVENT ENGINE ================= */
-        hiddenInput.addEventListener('input', (e) => {
-            if (!testStarted) {
-                startTest();
-            }
-
-            const typedVal = hiddenInput.value;
-            const currentTypedChar = typedVal[typedVal.length - 1];
-
-            if (!isRunning) return;
-
-            // Handle backspace or deletions
-            if (typedVal.length < charIndex) {
-                charIndex = typedVal.length;
-                updateCharacterStyling();
-                return;
-            }
-
-            totalTyped++;
-            if (currentTypedChar === activeText[charIndex]) {
-                correctChars++;
-                charIndex++;
-            } else {
-                mistakes++;
-                charIndex++;
-            }
-
-            updateCharacterStyling();
-            updateLiveMetrics();
-
-            // Check if test completed
-            if (charIndex >= activeText.length) {
-                endTest();
-            }
-        });
-
-        function updateCharacterStyling() {
-            const spans = textDisplay.querySelectorAll('span');
-            spans.forEach((span, idx) => {
-                span.className = "text-slate-400";
-                if (idx < charIndex) {
-                    // evaluated
-                    // check if correct or incorrect
-                    span.className = span.innerText === hiddenInput.value[idx] ? "text-emerald-400 font-medium" : "text-rose-400 bg-rose-500/20 rounded";
-                } else if (idx === charIndex) {
-                    span.className = "border-b-2 border-indigo-400 text-slate-100 bg-slate-700/40 animate-blink";
-                }
-            });
-        }
-
-        /* ================= TIMER & METRICS ================= */
-        function startTest() {
-            testStarted = true;
-            isRunning = true;
-            timeLeft = testDuration;
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                hudTimer.innerText = `${timeLeft}s`;
-                updateLiveMetrics();
-                if (timeLeft <= 0) {
-                    endTest();
-                }
-            }, 1000);
-        }
-
-        function updateLiveMetrics() {
-            const timeElapsed = testDuration - timeLeft;
-            if (timeElapsed <= 0) return;
-
-            const minutes = timeElapsed / 60;
-            const wpm = Math.round((correctChars / 5) / minutes);
-            const accuracy = totalTyped > 0 ? Math.max(0, Math.round(((correctChars) / totalTyped) * 100)) : 100;
-
-            hudWpm.innerText = isNaN(wpm) ? 0 : wpm;
-            hudAcc.innerText = `${accuracy}%`;
-            hudErrors.innerText = mistakes;
-        }
-
-        function resetTestStateOnly() {
-            clearInterval(timerInterval);
-            isRunning = false;
-            testStarted = false;
-            charIndex = 0;
-            mistakes = 0;
-            correctChars = 0;
-            totalTyped = 0;
-            hiddenInput.value = '';
-            timeLeft = testDuration;
-            hudTimer.innerText = `${timeLeft}s`;
-            hudWpm.innerText = '0';
-            hudAcc.innerText = '100%';
-            hudErrors.innerText = '0';
-            resultModal.classList.add('hidden');
-            focusOverlay.style.display = 'flex';
-            focusOverlay.style.opacity = '1';
-        }
-
-        function resetTest() {
-            resetTestStateOnly();
-            initTestText();
-        }
-
-        /* ================= TEST COMPLETION & EVALUATION ================= */
-        function endTest() {
-            clearInterval(timerInterval);
-            isRunning = false;
-
-            const timeElapsed = testDuration - timeLeft || testDuration;
-            const minutes = timeElapsed / 60;
-            const rawWpm = Math.round((totalTyped / 5) / minutes);
-            const netWpm = Math.max(0, Math.round((correctChars / 5) / minutes));
-            const accuracy = totalTyped > 0 ? Math.max(0, Math.round((correctChars / totalTyped) * 100)) : 100;
-
-            // Save record
-            const record = {
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-                mode: currentMode.toUpperCase(),
-                wpm: netWpm,
-                raw: rawWpm,
-                acc: accuracy,
-                err: mistakes,
-                level: getPerformanceLevel(netWpm).title
-            };
-
-            historyData.unshift(record);
-            if (historyData.length > 20) historyData.pop();
-            localStorage.setItem('typemaster_history', JSON.stringify(historyData));
-
-            showResults(netWpm, rawWpm, accuracy, mistakes);
-            updateStatsDashboard();
-        }
-
-        function getPerformanceLevel(wpm) {
-            if (wpm < 30) {
-                return { title: "Beginner", class: "bg-rose-500/10 text-rose-400 border border-rose-500/30", encouragement: "Great start! Focus on finger placement on the home row to build muscle memory." };
-            } else if (wpm <= 60) {
-                return { title: "Intermediate", class: "bg-amber-500/10 text-amber-400 border border-amber-500/30", encouragement: "Solid performance! You have decent speed. Try eliminating hesitation between common bigrams." };
-            } else if (wpm <= 90) {
-                return { title: "Advanced", class: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30", encouragement: "Impressive typing velocity! You type faster than most professionals. Keep aiming for zero errors." };
-            } else {
-                return { title: "Expert", class: "bg-indigo-500/10 text-indigo-400 border border-indigo-500/30", encouragement: "Elite Tier! Lightning-fast reflexes and precision. You possess master-level keyboard proficiency." };
-            }
-        }
-
-        function showResults(wpm, raw, acc, err) {
-            document.getElementById('res-wpm').innerText = wpm;
-            document.getElementById('res-raw').innerText = raw;
-            document.getElementById('res-acc').innerText = `${acc}%`;
-            document.getElementById('res-err').innerText = err;
-
-            const levelInfo = getPerformanceLevel(wpm);
-            const badgeContainer = document.getElementById('badge-container');
-            badgeContainer.className = `inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-sm font-bold shadow-lg ${levelInfo.class}`;
-            badgeContainer.innerHTML = `<i class="fa-solid fa-award"></i><span>${levelInfo.title} Level</span>`;
-
-            document.getElementById('encouragement-text').innerText = levelInfo.encouragement;
-
-            // Render tips
-            const tipsList = document.getElementById('tips-list');
-            tipsList.innerHTML = '';
-            const tips = [];
-            if (acc < 92) tips.push("<li>Prioritize accuracy over raw speed; fewer corrections lead to smoother velocity.</li>");
-            if (wpm < 40) tips.push("<li>Practice touch typing without looking at your keyboard to build natural reflex pathways.</li>");
-            if (err > 4) tips.push("<li>Watch out for recurring transposition mistakes on adjacent keys.</li>");
-            if (tips.length === 0) tips.push("<li>Outstanding rhythm and cadence! Maintain this consistency across code and quote modes.</li>");
-            tips.forEach(t => tipsList.innerHTML += t);
-
-            resultModal.classList.remove('hidden');
-            resultModal.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        /* ================= STATISTICS & DASHBOARD ================= */
-        function updateStatsDashboard() {
-            if (historyData.length === 0) {
-                document.getElementById('stat-pb').innerText = '0';
-                document.getElementById('stat-avg-wpm').innerText = '0';
-                document.getElementById('stat-total-tests').innerText = '0';
-                return;
-            }
-
-            const pb = Math.max(...historyData.map(h => h.wpm));
-            const avgWpm = Math.round(historyData.reduce((acc, h) => acc + h.wpm, 0) / historyData.length);
-
-            document.getElementById('stat-pb').innerText = pb;
-            document.getElementById('stat-avg-wpm').innerText = avgWpm;
-            document.getElementById('stat-total-tests').innerText = historyData.length;
-        }
-
-        function clearHistory() {
-            if (confirm("Are you sure you want to clear your typing history?")) {
-                historyData = [];
-                localStorage.removeItem('typemaster_history');
-                updateStatsDashboard();
-                renderHistoryTable();
-                if (performanceChartInstance) performanceChartInstance.destroy();
-            }
-        }
-
-        function renderHistoryTable() {
-            const tbody = document.getElementById('history-table-body');
-            tbody.innerHTML = '';
-            if (historyData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-500">No test history recorded yet. Complete a test to see records!</td></tr>`;
-                return;
-            }
-
-            historyData.forEach(h => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-700/30 transition";
-                tr.innerHTML = `
-                    <td class="py-3 px-4 font-medium text-white">${h.date}</td>
-                    <td class="py-3 px-4"><span class="px-2 py-1 bg-slate-700 rounded text-xs font-semibold">${h.mode}</span></td>
-                    <td class="py-3 px-4 font-mono font-bold text-indigo-400">${h.wpm} WPM</td>
-                    <td class="py-3 px-4 font-mono text-slate-400">${h.raw} WPM</td>
-                    <td class="py-3 px-4 font-mono text-cyan-400">${h.acc}%</td>
-                    <td class="py-3 px-4 font-mono text-rose-400">${h.err}</td>
-                    <td class="py-3 px-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-800 border border-slate-700 text-slate-200">${h.level}</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderChart() {
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            if (performanceChartInstance) {
-                performanceChartInstance.destroy();
-            }
-
-            const recent = [...historyData].reverse().slice(-10);
-            const labels = recent.map((r, i) => `Test ${i + 1} (${r.date})`);
-            const wpmValues = recent.map(r => r.wpm);
-            const accValues = recent.map(r => r.acc);
-
-            performanceChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels.length > 0 ? labels : ['No Data'],
-                    datasets: [
-                        {
-                            label: 'WPM',
-                            data: wpmValues.length > 0 ? wpmValues : [0],
-                            borderColor: '#818cf8',
-                            backgroundColor: 'rgba(129, 140, 248, 0.1)',
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Accuracy (%)',
-                            data: accValues.length > 0 ? accValues : [100],
-                            borderColor: '#22d3ee',
-                            backgroundColor: 'transparent',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            tension: 0.3
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: { color: '#94a3b8', font: { family: 'Inter' } }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: { color: 'rgba(51, 65, 85, 0.3)' },
-                            ticks: { color: '#94a3b8', font: { family: 'Inter' } }
-                        },
-                        y: {
-                            grid: { color: 'rgba(51, 65, 85, 0.3)' },
-                            ticks: { color: '#94a3b8', font: { family: 'Inter' } }
-                        }
-                    }
-                }
-            });
-        }
-    </script>
+    <div class="gift">
+      🎁 SOLVE & WIN ONE FREE PLANT!
+    </div>
+
+    <h2>Are You Smart Enough?</h2>
+
+    <p style="color:#666;margin-top:10px">
+      Test your brain with our simple puzzle.
+      No cheating, only thinking!
+    </p>
+
+    <div class="puzzle">
+
+      <h2>Today's Puzzle</h2>
+
+      <div class="sequence">
+        2, 6, 12, 20, 30, ?
+      </div>
+
+      <p>Can you find the missing number?</p>
+
+      <p style="margin-top:12px;color:#008c49">
+        💡 Think carefully before answering!
+      </p>
+
+    </div>
+
+    <form id="quizForm">
+
+      <label for="name">Your Name</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter your name"
+        required
+      >
+
+      <label for="phone">Your Mobile Number</label>
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Enter your 10-digit mobile number"
+        pattern="[6-9][0-9]{9}"
+        maxlength="10"
+        inputmode="numeric"
+        required
+      >
+
+      <label for="answer">Your Answer</label>
+      <input
+        type="number"
+        id="answer"
+        placeholder="Enter missing number"
+        required
+      >
+
+      <button type="submit" class="submit">
+        📲 Submit Answer on WhatsApp
+      </button>
+
+    </form>
+
+    <p class="note">
+      Your answer and contact details will be sent
+      directly to K2 Hariyali WhatsApp.
+      Our team will check your answer and contact
+      the winner.
+
+      <br><br>
+      🔒 Your mobile number will only be used
+      for quiz-related communication.
+    </p>
+
+  </div>
+
+  <div class="footer">
+    🌱 K2 Hariyali | Patna
+    <br><br>
+    Gift Hariyali, Gift Life ❤️
+  </div>
+
+</div>
+
+<script>
+
+document.getElementById("quizForm")
+.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const mobile =
+    document.getElementById("phone").value.trim();
+
+  const answer =
+    document.getElementById("answer").value.trim();
+
+  if (!name || !mobile || !answer) {
+    alert("Please fill all details!");
+    return;
+  }
+
+  if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+    alert("Please enter a valid 10-digit Indian mobile number!");
+    return;
+  }
+
+  const whatsappNumber = "919693720736";
+
+  const message =
+`🌿 K2 HARIYALI BRAIN CHALLENGE 🌿
+
+🎁 FREE PLANT GIVEAWAY
+
+👤 Customer Name: ${name}
+
+📱 Customer Mobile: ${mobile}
+
+🧠 Puzzle Answer: ${answer}
+
+I want to participate in the K2 Hariyali Quiz.
+
+Thank you!
+🌱 K2 Hariyali`;
+
+  const url =
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(message);
+
+  window.open(url, "_blank");
+
+});
+
+</script>
+
 </body>
 </html>
